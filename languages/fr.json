@@ -1,0 +1,34 @@
+{
+  "nav": {
+    "signin": "S'inscrire",
+    "login": "Se connecter",
+    "logo_alt": "Logo de Msharfin"
+  },
+  "moto": {
+    "title": {
+      "0": "Socialiser",
+      "1": "avec",
+      "2": "intimité"
+    },
+    "picture_alt": "Homme prenant un selfie"
+  },
+  "features": {
+    "0": {
+      "title": "Protection de la vie privée",
+      "detail": "Nous respectons votre droit d'accès et de suppression de vos données en vertu de la loi marocaine n° 09-08 relative à la protection des individus à l'égard du traitement des données à caractère personnel."
+    },
+    "1": {
+      "title": "Sécurité",
+      "detail": "Grâce aux filtres intégrés, vous pouvez profiter des médias sociaux et contrôler le contenu que vous consommez sans avoir un impact négatif ou néfaste sur vous-même."
+    },
+    "title": {
+      "0": "Les médias",
+      "1": "sociaux",
+      "2": "bien",
+      "3": "faits"
+    }
+  },
+  "footer": {
+    "lang": "Language"
+  }
+}
