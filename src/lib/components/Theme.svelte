@@ -20,10 +20,10 @@
 	font-weight: 600
 	color: hsl(0, 0%, 50%)
 	background: none
-	width: 2.25rem
+	width: 2.2rem
 	height: 2rem		
 	font-size: 24px
-	padding-top: 0
+	padding-block: .25rem
 	&:hover
 		background-color: $container-color
 </style>

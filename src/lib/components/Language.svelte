@@ -87,9 +87,7 @@
 			margin-left: .5rem
 
 .ico
-	margin: 0 0 0 .25rem
-	&:lang(ar)
-		margin: 0 .25rem 0 0
+	margin-block-start: .25rem
 
 .flip > :global(.arrow)
 	transform: scaleY(-1)

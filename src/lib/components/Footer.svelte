@@ -3,7 +3,7 @@
 	import Theme from "$lib/components/Theme.svelte"
     import {i} from "@inlang/sdk-js"
 
-    export const version = "0.0.4"
+    export const version = "0.0.4.1"
 </script>
 
 <footer>
@@ -22,7 +22,7 @@ footer
 	padding: .5rem 10rem
 	align-items: center
 	&:lang(ar)
-		justify-content: flex-start
+		direction: rtl
 	h3
 		color: $text-secondary-color
 		font-size: 1rem
@@ -32,17 +32,12 @@ footer
 	color: $text-secondary-color
 	display: flex
 	align-items: center
-	margin: 0 0 0 auto
-	&:lang(ar)
-		margin: 0 auto 0 0	
-
+	margin-inline-start: auto
 	div 
 		display: flex
 		align-items: center
 		&:last-child
-			margin: 0 0 0 .5rem
-			&:lang(ar)
-				margin: 0 .5rem 0 0
+			margin-inline-start: .5rem
 
 @media screen and (max-width: 1024px)
 	footer

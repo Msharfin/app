@@ -23,8 +23,7 @@
   <section class="features">
     <div class="title-wrap">
       <h2>
-        {i("features.title.0")} <span>{i("features.title.1")}</span>
-        {i("features.title.2")}
+        {i("features.title.0")} <span>{i("features.title.1")}</span>{i("features.title.2")}
       </h2>
     </div>
     <div
@@ -37,14 +36,14 @@
       <div class="container-wrap">
         <div>
           <h2>
-            <span><Icon icon="icon-park-twotone:personal-privacy" /></span>
+            <span><Icon class="f-ico" icon="icon-park-twotone:personal-privacy" /></span>
             {i("features.0.title")}
           </h2>
           <p>{i("features.0.detail")}</p>
         </div>
         <div>
           <h2>
-            <span><Icon icon="ic:twotone-security" /></span>
+            <span><Icon class="f-ico" icon="ic:twotone-security" /></span>
             {i("features.1.title")}
           </h2>
           <p>{i("features.1.detail")}</p>
@@ -68,7 +67,8 @@
 	height: 50vh
 	position: relative
 	display: flex
-	padding: 7rem 10rem
+	margin: 5rem auto
+	margin-inline: 10rem
 	display: flex
 	justify-content: space-between
 	align-items: center
@@ -101,9 +101,8 @@
 .content-wrap
 	display: flex
 .container-wrap
-	margin: 1rem 0 0 5rem
-	&:lang(ar)
-		margin: 1rem 5rem 0 0
+	margin-top: .5rem
+	margin-inline-start: 5rem
 	div
 		background-color: $container-color
 		padding: 2rem 2rem 
@@ -116,19 +115,21 @@
 		margin: 0 0 1rem 
 		font-size: 1.5rem
 		font-family: "Inter"
-		font-weight: 700
+		font-weight: 700 
+		display: inline-flex
+		align-items: center
 		&:lang(ar)
 			font-family: "Tajawal"
 		span
 			color: white
-			vertical-align: middle
-			margin-right: .5rem
+			margin-inline-end: .5rem
 			border-radius: 8px
-			padding: .45rem .65rem .15rem .65rem
+			padding: .45rem
 			background-color: red
 			animation: gradient 35s infinite
-			&:lang(ar)
-				margin-left: .5rem
+			height: fit-content
+			:global(.f-ico)
+				display: block
 
 	p
 		margin: 0
@@ -138,19 +139,21 @@
 		&:lang(ar)
 			font-weight: 500
 .img-wrap
-	position: relative
+	display: flex
+	align-items: center
+	justify-content: center
 	img
 		width: 18rem
-		margin-top: 5rem
-		margin-right: 1rem
+		margin-left: 2rem
 		transform: scaleX(-1) scale(1.5)
 		animation: gradient 35s infinite
 		&:lang(ar)
 			// This will remove the scaleX property while keeping the scale property
 			transform: scale(1.5)
-@media only screen and (max-width: 1024px)
+@media only screen and (max-width: 789px)
 	.welcome
-		padding: 1rem 3rem 3rem
+		margin: 3rem auto 3rem
+		margin-inline: 3rem
 		display: flex
 		flex-direction: column
 		justify-content: center
@@ -167,12 +170,11 @@
 		.title-wrap
 			font-size: 1.25rem				
 	.container-wrap
-		margin: 1rem 1rem 0 1rem
+		margin-top: 1rem 
+		margin-inline-start: 0
 		h2
 			margin: 0 0 1rem 
 			font-size: 1.5rem
-		&:lang(ar)
-			margin-right: 0
 	.img-wrap
 		img
 			display: none

@@ -33,7 +33,7 @@
 	z-index: -1
 	transform: rotate(45deg)
 	top: -10rem
-	right: 50rem
+	inset-inline: 10rem
 .blur
 	filter: blur(30px)
 
@@ -51,16 +51,14 @@ header
 	padding: 2rem 10rem
 	transition: all 0.1s ease
 	&:lang(ar)
-		justify-content: flex-end
+		direction: rtl
 
 	img
 		width: 3rem
 	.left-nav
-		margin: 0 0 0 auto
-		&:lang(ar)
-			margin: 0 auto 0 0
+		margin-inline-start: auto
 		button
-			margin-left: 2rem
+			margin-inline-start: 2rem
 			font-weight: 600
 			background-color: $text-color
 			color: $button-text-color
@@ -68,8 +66,7 @@ header
 			padding: 10px 20px
 			border-radius: 24px
 			font-size: 1rem
-			&:lang(ar)
-				margin: 0 2rem 0 0
+
 			&:hover
 				background-color: $hover-color
 		a
@@ -80,11 +77,13 @@ header
 @media screen and (max-width: 1024px)
 	header
 		padding: 2rem 3rem
-		.left-nav button
-			margin-left: 1rem
-			&:lang(ar)
-				margin: 0 1rem 0 0
+		.left-nav
+			a
+				display: none 
+			button
+				margin-inline-start: 1rem 
 		img
 			width: 2.75rem
+	
 
 </style>
