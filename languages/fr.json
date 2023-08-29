@@ -22,13 +22,13 @@
       "detail": "Grâce aux filtres intégrés, vous pouvez profiter des médias sociaux et contrôler le contenu que vous consommez sans avoir un impact négatif ou néfaste sur vous-même."
     },
     "title": {
-      "0": "Les médias",
-      "1": "sociaux",
-      "2": "bien",
-      "3": "faits"
+      "0": "Pourquoi choisir",
+      "1": "Msharfin",
+      "2": "?"
     }
   },
   "footer": {
-    "lang": "Language"
+    "lang": "Langage",
+    "theme": "Théme"
   }
 }

@@ -1,0 +1,65 @@
+
+*
+	box-sizing: border-box
+
+html:lang(ar)
+	direction: rtl
+
+html
+	display: flex
+	flex-direction: column
+	color: $text-color
+	background-color: $background-color
+
+body
+	margin: 0
+
+h1, h2, span
+	font-family: "PlayFair Display", "Noto Color Emoji"
+
+*:lang(ar), *:lang(ar) > span, *:lang(ar) > h1, *:lang(ar) > h2
+	font-family: "Tajawal", "Noto Color Emoji"
+
+*
+	font-family: "Inter", "Noto Color Emoji"
+
+img
+	user-select: none
+
+a
+	vertical-align: middle
+	text-decoration: underline
+	transition: all .5s ease
+
+.link
+	vertical-align: baseline
+	&::after
+		content: " \2197"
+		font-family: "Inter"
+		font-size: 1.25rem
+	&:lang(ar):after
+		content: " \2196"
+
+button
+	color: $text-color
+	cursor: pointer
+	transition: all .5s ease
+
+.ico
+	vertical-align: middle
+	padding-inline: 0 .2rem
+	&:lang(ar)
+		padding-inline: .2rem 0
+
+html[theme="dark"]
+	.logo
+		filter: invert(1)
+	.welcome-img
+		content: url("/images/welcome_dark.png")
+	.features-img
+		content: url("/images/sitting-reading_dark.png")
+
+@media screen and (max-width: 1024px)
+	html:lang(ar)
+		
+		

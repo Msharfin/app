@@ -1,0 +1,45 @@
+@keyframes gradient
+    0%
+        filter: hue-rotate(0deg)
+    100%
+        filter: hue-rotate(360deg)
+
+:root
+    --text-color: hsl(0, 0%, 10%)
+    --button-text-color: hsl(200, 20%, 90%)
+    --text-secondary-color: hsl(0,0%,50%)
+
+    --hover-color: hsl(0, 0%, 50%)
+    --hover-secondary-color: hsl(0, 0%, 80%)
+
+    --background-color: hsl(0, 0%, 100%)
+    --hover-container-color: hsl(0, 0%, 70%)
+    --container-color: hsl(0, 0%, 90%)
+
+// Light mode
+$text-color: var(--text-color)
+$text-secondary-color: var(--text-secondary-color)
+$button-text-color: var(--button-text-color)
+
+$hover-container-color: var(--hover-container-color)
+
+$hover-color: var(--hover-color)
+$hover-secondary-color: --hover-secondary-color
+
+$background-color: var(--background-color)
+
+$container-color: var(--container-color)
+
+// Dark mode
+html[theme="dark"]
+    --text-secondary-color: hsl(200, 20%, 70%)
+    --text-color: hsl(200, 20%, 90%)
+    --button-text-color: hsl(0,0%,10%)
+
+    --hover-color: hsl(200, 20%, 65%)
+    --secondary-hover-color: hsl(200, 20%, 100%)
+
+    --background-color: hsl(200, 20%, 10%)
+
+    --container-color: hsl(200, 20%, 20%)
+    --hover-container-color: hsl(200, 20%, 16%)

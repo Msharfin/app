@@ -2,9 +2,8 @@
 <html>
 	<head>
 		<meta charset="utf-8" />
+		<meta name="theme-color" content="#000000" />
 		<link rel="icon" href="%sveltekit.assets%/images/favicon.png" />
-		<link rel="stylesheet" href="%sveltekit.assets%/app.css">
-		<script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js" crossorigin="anonymous"></script>
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">		
@@ -17,6 +16,16 @@
 	<body data-sveltekit-preload-data="hover">
 		<div style="display: contents">%sveltekit.body%</div>
 	</body>
-	<script>
-	twemoji.parse(document.body);</script>
+	<script type="module">
+		const userTheme = localStorage.getItem("theme")
+
+		if (userTheme !== null) {
+			document.documentElement.setAttribute("theme", userTheme) 
+		} else if (window.matchMedia("(prefers-color-scheme:dark)").matches) {
+			localStorage.setItem("theme", "dark") 
+			document.documentElement.setAttribute("theme", "dark")
+		} else {
+			localStorage.setItem("theme", "light")
+		}
+	</script>
 </html>
