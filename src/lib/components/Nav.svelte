@@ -1,7 +1,8 @@
 <script lang="ts">
-    import {i} from "@inlang/sdk-js"
+    import { i } from "@inlang/sdk-js"
+	import { page } from '$app/stores';  
 
-    let y: number
+	let y: number
 	let startScroll: boolean
 
 	$: if (y > 30) {
@@ -16,10 +17,12 @@
 <div class="blur"><span class="background"></span></div>
 <header class:nav={startScroll} >
 	<a class="logo" href="/"><img src="/images/logo.png" alt={i("nav.logo_alt")}></a>
+	{#if $page.url.pathname === "/"}
 	<div class="left-nav">
-		<a href="/" class="link">{i("nav.login")}</a>
-		<button>{i("nav.signin")}</button>
+		<a href="/login" class="link">{i("nav.login")}</a>
+		<a href="/signin" class="btn">{i("nav.signin")}</a>
 	</div>
+	{/if}
 </header>
 
 <style lang="sass">
@@ -50,16 +53,15 @@ header
 	justify-content: flex-start
 	padding: 2rem 10rem
 	transition: all 0.1s ease
-	&:lang(ar)
-		direction: rtl
 
 	img
 		width: 3rem
 	.left-nav
 		margin-inline-start: auto
-		button
+		.btn
 			margin-inline-start: 2rem
 			font-weight: 600
+			text-decoration: none
 			background-color: $text-color
 			color: $button-text-color
 			border: none
@@ -68,6 +70,7 @@ header
 			font-size: 1rem
 
 			&:hover
+				color: inherit
 				background-color: $hover-color
 		a
 			font-weight: 400
@@ -78,9 +81,9 @@ header
 	header
 		padding: 2rem 3rem
 		.left-nav
-			a
+			a:first-child
 				display: none 
-			button
+			a:last-child
 				margin-inline-start: 1rem 
 		img
 			width: 2.75rem

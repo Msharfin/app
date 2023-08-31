@@ -1,34 +1,43 @@
 {
-  "nav": {
-    "signin": "Sign In",
-    "login": "Log In",
-    "logo_alt": "Msharfin Logo"
-  },
-  "moto": {
-    "title": {
+  "main": {
+    "moto": {
       "0": "Socialize",
       "1": "with",
       "2": "privacy"
     },
-    "picture_alt": "A Man taking a selfie"
-  },
-  "features": {
-    "0": {
-      "title": "Privacy",
-      "detail": "We respect your right to access and delete your data under Moroccan Law No. 09-08 on the Protection of Individuals with Regard to the Processing of Personal Data."
-    },
-    "1": {
-      "title": "Safety",
-      "detail": "With built-in filters, you can enjoy social media and control the content you consume without impacting yourself negatively or in a bad way."
-    },
-    "title": {
-      "0": "Why choose",
-      "1": "Msharfin",
-      "2": "?"
+    "features": {
+      "0": {
+        "title": "Privacy",
+        "detail": "We respect your right to access and delete your data under Moroccan Law No. 09-08 on the Protection of Individuals with Regard to the Processing of Personal Data."
+      },
+      "1": {
+        "title": "Safety",
+        "detail": "With built-in filters, you can enjoy social media and control the content you consume without impacting yourself negatively or in a bad way."
+      },
+      "title": {
+        "0": "Why choose",
+        "1": "Msharfin",
+        "2": "?"
+      }
     }
+  },
+  "nav": {
+    "signin": "Sign In",
+    "login": "Log In"
   },
   "footer": {
     "lang": "Language",
-    "theme": "Theme"
+    "tos": "Terms of use",
+    "policy": "Privacy policy"
+  },
+  "alt": {
+    "logo": "Msharfin Logo",
+    "welcome": "Man taking a selfie.",
+    "features": "Man sitting and reading a book",
+    "theme-switch": "Toggle between light and dark mode."
+  },
+  "titles": {
+    "main": "Socialize with 🔒 privacy",
+    "res-portal": "Resources portal"
   }
 }

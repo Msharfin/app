@@ -4,26 +4,26 @@
 </script>
 
 <svelte:head>
-  <title>Msharfin | Socialize with 🔒 privacy.</title>
+  <title>Msharfin | {i("titles.main")}.</title>
 </svelte:head>
 
 <div class="wrapper">
   <section class="welcome">
     <div>
       <h1>
-        <span>{i("moto.title.0")}</span>
-        {i("moto.title.1")} <br /><span class="ico"
+        <span>{i("main.moto.0")}</span>
+        {i("main.moto.1")} <br /><span class="ico"
           ><Icon icon="iconamoon:eye-off-duotone" /></span
         >
-        {i("moto.title.2")}<span>.</span>
+        {i("main.moto.2")}<span>.</span>
       </h1>
     </div>
-    <img src="/images/welcome.png" class="welcome-img" alt="Person holding a phone." />
+    <img src="/images/welcome.png" class="welcome-img" alt="{i("alt.welcome")}." />
   </section>
   <section class="features">
     <div class="title-wrap">
       <h2>
-        {i("features.title.0")} <span>{i("features.title.1")}</span>{i("features.title.2")}
+        {i("main.features.title.0")} <span>{i("main.features.title.1")}</span>{i("main.features.title.2")}
       </h2>
     </div>
     <div
@@ -37,16 +37,16 @@
         <div>
           <h2>
             <span><Icon class="f-ico" icon="icon-park-twotone:personal-privacy" /></span>
-            {i("features.0.title")}
+            {i("main.features.0.title")}
           </h2>
-          <p>{i("features.0.detail")}</p>
+          <p>{i("main.features.0.detail")}</p>
         </div>
         <div>
           <h2>
             <span><Icon class="f-ico" icon="ic:twotone-security" /></span>
-            {i("features.1.title")}
+            {i("main.features.1.title")}
           </h2>
-          <p>{i("features.1.detail")}</p>
+          <p>{i("main.features.1.detail")}</p>
         </div>
       </div>
     </div>
@@ -122,9 +122,9 @@
 			font-family: "Tajawal"
 		span
 			color: white
-			margin-inline-end: .5rem
+			margin-inline-end: .75rem
 			border-radius: 8px
-			padding: .45rem
+			padding: .5rem
 			background-color: red
 			animation: gradient 35s infinite
 			height: fit-content

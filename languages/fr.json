@@ -1,34 +1,43 @@
 {
-  "nav": {
-    "signin": "S'inscrire",
-    "login": "Se connecter",
-    "logo_alt": "Logo de Msharfin"
-  },
-  "moto": {
-    "title": {
+  "main": {
+    "moto": {
       "0": "Socialiser",
       "1": "avec",
       "2": "intimité"
     },
-    "picture_alt": "Homme prenant un selfie"
-  },
-  "features": {
-    "0": {
-      "title": "Protection de la vie privée",
-      "detail": "Nous respectons votre droit d'accès et de suppression de vos données en vertu de la loi marocaine n° 09-08 relative à la protection des individus à l'égard du traitement des données à caractère personnel."
-    },
-    "1": {
-      "title": "Sécurité",
-      "detail": "Grâce aux filtres intégrés, vous pouvez profiter des médias sociaux et contrôler le contenu que vous consommez sans avoir un impact négatif ou néfaste sur vous-même."
-    },
-    "title": {
-      "0": "Pourquoi choisir",
-      "1": "Msharfin",
-      "2": "?"
+    "features": {
+      "0": {
+        "title": "Protection de vie privée",
+        "detail": "Nous respectons votre droit d'accès et de suppression de vos données en vertu de la loi marocaine n° 09-08 relative à la protection des individus à l'égard du traitement des données à caractère personnel."
+      },
+      "1": {
+        "title": "Sécurité",
+        "detail": "Grâce aux filtres intégrés, vous pouvez profiter des médias sociaux et contrôler le contenu que vous consommez sans avoir un impact négatif ou néfaste sur vous-même."
+      },
+      "title": {
+        "0": "Pourquoi choisir",
+        "1": "Msharfin",
+        "2": "?"
+      }
     }
+  },
+  "nav": {
+    "signin": "S'inscrire",
+    "login": "Se connecter"
   },
   "footer": {
     "lang": "Langage",
-    "theme": "Théme"
+    "tos": "Termes d'usage",
+    "policy": "Politique de confidentialité"
+  },
+  "alt": {
+    "logo": "Logo de Msharfin",
+    "welcome": "Homme prenant un selfie",
+    "features": "Homme assis et lisant un livre",
+    "theme-switch": "Basculez entre le mode clair et foncé."
+  },
+  "titles": {
+    "main": "Socialiser avec 🔒 intimité",
+    "res-portal": "Portail de ressources"
   }
 }

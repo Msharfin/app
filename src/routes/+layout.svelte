@@ -1,18 +1,10 @@
-<script lang="ts">
-  import "../app.sass";
-  import Loading from "$lib/components/Loading.svelte";
-  import { navigating } from "$app/stores";
-  import Nav from "$lib/components/Nav.svelte";
-  import Footer from "$lib/components/Footer.svelte";
+<!-- This file was created by inlang.
+It is needed in order to circumvent a current limitation of SvelteKit. See https://github.com/inlang/inlang/issues/647
+You can remove this comment and modify the file as you like. We just need to make sure it exists.
+Please do not delete it (inlang will recreate it if needed). -->
+
+<script>
+    import "../app.sass";
 </script>
 
-{#if $navigating}
-  <Loading />
-{/if}
-
-<Nav />
-
 <slot />
-
-<Footer />
-

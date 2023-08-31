@@ -23,7 +23,7 @@
 	width: 2.2rem
 	height: 2rem		
 	font-size: 24px
-	padding-block: .25rem
+	padding: .25rem
 	&:hover
 		background-color: $container-color
 </style>

@@ -4,7 +4,7 @@
     import {i} from "@inlang/sdk-js"
 	import { page } from "$app/stores";
 
-    export const version = "0.0.4.1"
+    export const version = "0.0.5"
 </script>
 
 <footer>

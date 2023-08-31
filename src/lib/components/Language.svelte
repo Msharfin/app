@@ -62,6 +62,10 @@
 		direction: ltr
 	&:hover
 		background-color: $hover-container-color
+.lang_btn
+	display: flex
+	justify-content: center
+	align-items: center
 
 .lang_choice
 	position: absolute
@@ -84,10 +88,10 @@
 		span
 			font-family: "Inter" !important
 			color: hsl(0, 0%, 60%)
-			margin-left: .5rem
+			margin-left: .25rem
 
 .ico
-	margin-block-start: .25rem
+	margin-inline-start: .5rem
 
 .flip > :global(.arrow)
 	transform: scaleY(-1)
