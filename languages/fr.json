@@ -28,7 +28,8 @@
   "footer": {
     "lang": "Langage",
     "tos": "Termes d'usage",
-    "policy": "Politique de confidentialité"
+    "policy": "Politique de confidentialité",
+    "status": "Services status"
   },
   "alt": {
     "logo": "Logo de Msharfin",
@@ -39,5 +40,14 @@
   "titles": {
     "main": "Socialiser avec 🔒 intimité",
     "res-portal": "Portail de ressources"
+  },
+  "resources": {
+    "res-nav": {
+      "/resources": "Accueil",
+      "/resources/tos": "Termes d'usage",
+      "/resources/privacy_policy": "Politique de confidentialité"
+    },
+    "home": "Bienvenue sur le 📜 Portail de ressources ! L'endroit où vous pouvez accéder à notre documentation, nos politiques... Commencez par choisir ce que vous voulez lire :"
   }
+
 }

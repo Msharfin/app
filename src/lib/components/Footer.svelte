@@ -4,7 +4,7 @@
     import {i} from "@inlang/sdk-js"
 	import { page } from "$app/stores";
 
-    export const version = "0.0.5"
+    export const version = "0.0.5.1"
 </script>
 
 <footer>
@@ -19,9 +19,9 @@
 	{#if $page.url.pathname === "/"}
 	<div class="lower">
 		<div>
-			<a target="_blank" rel="noopener noreferrer" href="https://bbusddswtqskejsgbacj.supabase.co/storage/v1/object/public/Resources%20portal/TERMS%20OF%20USE.pdf" class="link">{i("footer.tos")}</a>
+			<a href="/resources" class="link">{i("titles.res-portal")}</a>
 			&#0149;
-			<a target="_blank" rel="noopener noreferrer" href="https://bbusddswtqskejsgbacj.supabase.co/storage/v1/object/public/Resources%20portal/PRIVACY%20POLICY.pdf" class="link">{i("footer.policy")}</a>
+			<a target="_blank" rel="noopener noreferrer" href="https://msharfin.statuspage.io/" class="link">{i("footer.status")}</a>
 		</div>
 	</div>		
 	{/if}

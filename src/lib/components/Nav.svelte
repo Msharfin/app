@@ -79,7 +79,7 @@ header
 				color: $hover-color
 @media screen and (max-width: 1024px)
 	header
-		padding: 2rem 3rem
+		padding: 2rem 2rem
 		.left-nav
 			a:first-child
 				display: none 
