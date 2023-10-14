@@ -1,15 +1,19 @@
 
 <script>
-	import Icon from "@iconify/svelte";
-	import { changeTheme, theme } from "$lib/theme";
+	import Icon from "@iconify/svelte"
+	import { i } from "@inlang/sdk-js"
+	import { changeTheme, theme } from "$lib/theme"
 </script>
 
-<button class="theme_btn" on:click={() => changeTheme()}>
+<button title={i("alt.theme-switch")} class="theme_btn" on:click={() => changeTheme()}>
+	<span class="ico">
 	{#if $theme === "light"}
-		<Icon class="theme" icon="line-md:moon-twotone" />
+		<Icon icon="line-md:moon-twotone" />
 	{:else}		
-		<Icon class="theme" icon="line-md:sunny-outline-twotone" />
-	{/if}
+		<Icon icon="line-md:sunny-outline-twotone" />
+	{/if}		
+	</span>
+
 </button>
 
 <style lang="sass">
@@ -17,11 +21,8 @@
 	border: none
 	border-radius: 75px 
 	transition: all .5s ease
-	font-weight: 600
-	color: hsl(0, 0%, 50%)
+	color: $text-secondary-color
 	background: none
-	width: 2.2rem
-	height: 2rem		
 	font-size: 24px
 	padding: .25rem
 	&:hover

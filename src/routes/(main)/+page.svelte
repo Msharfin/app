@@ -1,6 +1,6 @@
 <script>
-  import Icon from "@iconify/svelte";
-  import { i } from "@inlang/sdk-js";
+  import Icon from "@iconify/svelte"
+  import { i } from "@inlang/sdk-js"
 </script>
 
 <svelte:head>
@@ -12,7 +12,7 @@
     <div>
       <h1>
         <span>{i("main.moto.0")}</span>
-        {i("main.moto.1")} <br /><span class="ico"
+        {i("main.moto.1")} <br /><span class="title-ico"
           ><Icon icon="iconamoon:eye-off-duotone" /></span
         >
         {i("main.moto.2")}<span>.</span>
@@ -31,7 +31,7 @@
 		"
     >
       <div class="img-wrap">
-        <img src="/images/sitting-reading.png" class="features-img" alt="Man sitting and reading." />
+        <img src="/images/sitting-reading.png" class="features-img" alt="{i("alt.features")}." />
       </div>
       <div class="container-wrap">
         <div>
@@ -144,7 +144,7 @@
 	justify-content: center
 	img
 		width: 18rem
-		margin-left: 2rem
+		margin-inline: 2rem
 		transform: scaleX(-1) scale(1.5)
 		animation: gradient 35s infinite
 		&:lang(ar)
@@ -177,5 +177,8 @@
 			font-size: 1.5rem
 	.img-wrap
 		img
-			display: none
+			position: absolute
+			visibility: hidden
+			overflow: hidden
+			margin-inline-end: 999rem
 </style>

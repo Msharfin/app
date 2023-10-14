@@ -1,15 +1,12 @@
 <script lang="ts">
-  import Loading from "$lib/components/Loading.svelte";
-  import { navigating } from "$app/stores";
-  import Nav from "$lib/components/Nav.svelte";
-  import Footer from "$lib/components/Footer.svelte";
+  import Nav from "$lib/components/Nav.svelte"
+  import Footer from "$lib/components/Footer.svelte"
+
+  export let data
+  $:({session}= data)
 </script>
 
-{#if $navigating}
-  <Loading />
-{/if}
-
-<Nav />
+<Nav {session} />
 
 <slot />
 

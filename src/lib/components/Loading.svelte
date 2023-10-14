@@ -10,6 +10,7 @@
 </div>	
 
 <style lang="sass">
+
 .loading
 	position: fixed
 	height: 100vh

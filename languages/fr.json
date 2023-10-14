@@ -23,13 +23,14 @@
   },
   "nav": {
     "signin": "S'inscrire",
-    "login": "Se connecter"
+    "login": "Se connecter",
+    "enter": "L'appli"
   },
   "footer": {
     "lang": "Langage",
     "tos": "Termes d'usage",
     "policy": "Politique de confidentialité",
-    "status": "Services status"
+    "status": "Status de services"
   },
   "alt": {
     "logo": "Logo de Msharfin",
@@ -39,7 +40,8 @@
   },
   "titles": {
     "main": "Socialiser avec 🔒 intimité",
-    "res-portal": "Portail de ressources"
+    "res-portal": "Portail de ressources",
+    "settings": "Paramètres"
   },
   "resources": {
     "res-nav": {
@@ -47,7 +49,33 @@
       "/resources/tos": "Termes d'usage",
       "/resources/privacy_policy": "Politique de confidentialité"
     },
-    "home": "Bienvenue sur le 📜 Portail de ressources ! L'endroit où vous pouvez accéder à notre documentation, nos politiques... Commencez par choisir ce que vous voulez lire :"
+    "home": "Bienvenue sur le 📜 Portail de ressources ! L'endroit où vous pouvez accéder à notre documentation, nos politiques... Commencez par choisir ce que vous voulez lire :"
+  },
+  "auth": {
+    "email": "Adresse e-mail",
+    "password": "Mot de passe",
+    "birth": "Date de naissance",
+    "username": "Nom d'utilisateur",
+    "confirm-pass": "Confirmer le mot de passe",
+    "show-pass": "Masquer / afficher le mot de passe",
+    "continue": "Continuer",
+    "notice": "Cette connexion durera une longue période. Si vous souhaitez une connexion temporaire, veuillez utiliser le mode incognito à la place!",
+    "short_pass": "Le mot de passe est trop court!",
+    "oauth":"Se connecter avec Google",
+    "or":"Où",
+    "statement": {
+      "0": "En vous inscrivant, vous acceptez les",
+      "1": "et"
+    }
+  },
+  "settings": {
+    "appearance": "Apparence",
+    "theme": {"1":"Activer le thème", "2":""},
+    "light": "sombre",
+    "dark": "clair",
+    "account": "Compte",
+    "acc-info": "Connecté en tant que",
+    "sign-out": "Déconnexion",
+    "misc": "Autres"
   }
-
 }

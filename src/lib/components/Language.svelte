@@ -21,7 +21,7 @@
 	if (browser) {
 		// https://thewebdev.info/2022/02/13/how-to-hide-a-div-when-it-loses-focus-with-javascript/
 		document.onmouseup = (e) => {
-		  if (e.target !== div) {
+		  if (e.target !== div && div) {
 		    div.style.display = "none"
 		    flip = false
 		  }
@@ -70,6 +70,7 @@
 .lang_choice
 	position: absolute
 	bottom: 125%
+	z-index: 5
 	font-size: 0
 	list-style-type: none
 	flex-direction: column

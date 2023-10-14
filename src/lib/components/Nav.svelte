@@ -1,9 +1,11 @@
 <script lang="ts">
     import { i } from "@inlang/sdk-js"
-	import { page } from '$app/stores';  
+	import type { Session } from "@supabase/supabase-js"
 
-	let y: number
-	let startScroll: boolean
+	export let session: Session | null
+
+	let y = 0
+	let startScroll = false
 
 	$: if (y > 30) {
 		startScroll = true
@@ -14,35 +16,23 @@
 
 <svelte:window bind:scrollY={y} />
 
-<div class="blur"><span class="background"></span></div>
 <header class:nav={startScroll} >
 	<a class="logo" href="/"><img src="/images/logo.png" alt={i("nav.logo_alt")}></a>
-	{#if $page.url.pathname === "/"}
 	<div class="left-nav">
-		<a href="/login" class="link">{i("nav.login")}</a>
-		<a href="/signin" class="btn">{i("nav.signin")}</a>
+		{#if !session}
+			<!-- <a href="/login" class="link">{i("nav.login")}</a> -->
+			<a href="/login" class="btn">{i("nav.login")}</a>
+		{:else}
+			<a href="/app" class="btn">{i("nav.enter")}</a>
+		{/if}
 	</div>
-	{/if}
 </header>
 
 <style lang="sass">
-.background 
-	position: absolute
-	background-color: red
-	animation: gradient 35s infinite
-	width: .5rem
-	border-radius: 60%
-	height: 50vh
-	z-index: -1
-	transform: rotate(45deg)
-	top: -10rem
-	inset-inline: 10rem
-.blur
-	filter: blur(30px)
 
 .nav
 	z-index: 3
-	backdrop-filter: blur(75px)
+	backdrop-filter: blur(85px)
 	background-color: hsla($background-color, 0.8)
 	transition: all 0.1s ease		
 header
@@ -77,12 +67,12 @@ header
 			color: $text-color
 			&:hover
 				color: $hover-color
-@media screen and (max-width: 1024px)
+@media screen and (max-width: 789px)
 	header
 		padding: 2rem 2rem
 		.left-nav
-			a:first-child
-				display: none 
+			// a:first-child
+			// 	display: none 
 			a:last-child
 				margin-inline-start: 1rem 
 		img

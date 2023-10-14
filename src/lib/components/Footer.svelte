@@ -3,8 +3,8 @@
 	import Theme from "$lib/components/Theme.svelte"
     import {i} from "@inlang/sdk-js"
 	import { page } from "$app/stores";
+  	import { version } from "$lib"
 
-    export const version = "0.0.5.1"
 </script>
 
 <footer>
@@ -30,6 +30,7 @@
 
 <style lang="sass">
 footer
+	user-select: none
 	padding-inline: 10rem
 	.upper, .lower
 		padding-block: .75rem
@@ -57,9 +58,9 @@ footer
 		&:hover
 			filter: brightness(0.5)
 		&:last-child
-			margin-inline-start: 1rem	
+			margin-inline-start: .5rem	
 		&:first-child
-			margin-inline-end: 1rem	
+			margin-inline-end: .5rem	
 .wrapper
 	color: $text-secondary-color
 	display: flex

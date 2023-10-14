@@ -6,13 +6,15 @@ html:lang(ar)
 	direction: rtl
 
 html
-	display: flex
-	flex-direction: column
 	color: $text-color
 	background-color: $background-color
 
 body
+	position: relative
+	display: flex
+	flex-direction: column
 	margin: 0
+	min-height: 100vh
 
 h1, h2, span
 	font-family: "PlayFair Display", "Noto Color Emoji"
@@ -45,11 +47,11 @@ button
 	cursor: pointer
 	transition: all .5s ease
 
-.ico
+.title-ico
 	vertical-align: middle
-	padding-inline: 0 .2rem
-	&:lang(ar)
-		padding-inline: .2rem 0
+
+.ico
+	display: flex
 
 html[theme="dark"]
 	.logo
@@ -59,7 +61,4 @@ html[theme="dark"]
 	.features-img
 		content: url("/images/sitting-reading_dark.png")
 
-// @media screen and (max-width: 1024px)
-// 	html:lang(ar)
-		
 		

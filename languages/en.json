@@ -23,7 +23,8 @@
   },
   "nav": {
     "signin": "Sign In",
-    "login": "Log In"
+    "login": "Log In",
+    "enter": "Enter app"
   },
   "footer": {
     "lang": "Language",
@@ -39,7 +40,8 @@
   },
   "titles": {
     "main": "Socialize with 🔒 privacy",
-    "res-portal": "Resources portal"
+    "res-portal": "Resources portal",
+    "settings": "Settings"
   },
   "resources": {
     "res-nav": {
@@ -48,5 +50,32 @@
       "/resources/privacy_policy": "Privacy Policy"
     },
     "home": "Welcome to the 📜 Resources portal! The place where you can access our documentation, policies... Start by choosing what you want to read:"
+  },
+  "auth": {
+    "email": "E-mail address",
+    "password": "Password",
+    "birth": "Date of birth",
+    "username": "Username",
+    "confirm-pass": "Confirm password",
+    "show-pass": "Hide/show password",
+    "continue": "Continue",
+    "notice": "This login session will last for a long time. if you want a temporary login session, please use incognito mode instead!",
+    "short-pass": "Password is too short!",
+    "oauth":"Sign in with Google",
+    "or":"OR",
+    "statement": {
+      "0": "By signing up you agree to",
+      "1": "and"
+    }
+  },
+  "settings": {
+    "appearance": "Appearance",
+    "theme": {"1":"Enable","2":"theme"},
+    "light": "dark",
+    "dark": "light",
+    "account": "Account",
+    "acc-info": "Signed in as",
+    "sign-out": "Sign out",
+    "misc": "Miscellaneous"
   }
 }
