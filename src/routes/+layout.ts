@@ -23,7 +23,7 @@ export const load = async ({ fetch, data, depends }) => {
 
   const { data: profile } = await supabase
   .from('users')
-  .select('id, name, avatar_url, slug')  
+  .select('id, name, avatar_url, slug').eq("id", session?.user.id) 
 
   return { supabase, session, userProfile: profile? profile[0]: null }
 }
