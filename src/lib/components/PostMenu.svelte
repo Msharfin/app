@@ -4,6 +4,7 @@
     import { fly } from "svelte/transition"
     import { errorToast } from "$lib/toastStyles"
     import { supadb } from "$lib/supabaseClient"
+    import { i } from "@inlang/sdk-js";=
 
     let showMore = false
     /**
@@ -80,9 +81,9 @@
 
 {#if showMore}
     {#if user?.id === post.author}
-        <li in:fly={{ x: 50, duration: 300 }}><button class="more danger" on:click={() => deletePost(post.id, user?.id)}><span class="ico"><Icon icon="icon-park-twotone:delete" /></span><p>Delete</p></button> </li>
+        <li in:fly={{ x: 50, duration: 300 }}><button class="more danger" on:click={() => deletePost(post.id, user?.id)}><span class="ico"><Icon icon="icon-park-twotone:delete" /></span><p>{i("app.delete")}</p></button> </li>
     {/if}
-    <li in:fly={{ x: 50, duration: 300 }}><button class="more" on:click={()=> navigator.share({title:"Msharfin", url:`${window.location.origin}/app/profile/${post.id}`, text: post.content})}> <span class="ico"><Icon icon="icon-park-twotone:share-one" /></span> <p>Share</p></button> </li>
+    <li in:fly={{ x: 50, duration: 300 }}><button class="more" on:click={()=> navigator.share({title:"Msharfin", url:`${window.location.origin}/app/profile/${post.id}`, text: post.content})}> <span class="ico"><Icon icon="icon-park-twotone:share-one" /></span> <p>{i("app.share")}</p></button> </li>
 {:else}
 <li in:fly={{ x: 50, duration: 300 }}><button on:click={()=>
     {if (hasLiked){
@@ -143,4 +144,4 @@ div
     button
         margin-inline-start: 1rem
 
-</style>
+</style

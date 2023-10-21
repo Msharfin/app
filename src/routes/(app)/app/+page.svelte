@@ -20,7 +20,7 @@
         (payload) => {
         if (payload.eventType === "INSERT") {
             if ($page.url.pathname !== "/app/create") {
-                toast("New posts, refresh to see them!", refreshToast)
+                toast(i("app.refresh"), refreshToast)
             }
         } else {
             posts.pop(payload.old)
