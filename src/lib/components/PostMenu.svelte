@@ -4,7 +4,7 @@
     import { fly } from "svelte/transition"
     import { errorToast } from "$lib/toastStyles"
     import { supadb } from "$lib/supabaseClient"
-    import { i } from "@inlang/sdk-js";=
+    import { i } from "@inlang/sdk-js"
 
     let showMore = false
     /**
@@ -144,4 +144,4 @@ div
     button
         margin-inline-start: 1rem
 
-</style
+</style>
