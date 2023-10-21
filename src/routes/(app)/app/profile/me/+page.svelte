@@ -14,8 +14,8 @@
 <section>
     <div class="profile-info">
         <div class="avatar">
-        {#if session?.user.user_metadata.avatar_url}
-            <img src="{session?.user.user_metadata.avatar_url}" alt="">
+        {#if userProfile?.avatar_url}
+            <img src="{userProfile?.avatar_url}" alt="">
         {:else}
             <img src="" alt="">
         {/if}
