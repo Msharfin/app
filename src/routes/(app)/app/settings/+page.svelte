@@ -26,6 +26,10 @@
     }
 </script>
 
+<svelte:head>
+    <title>{i("titles.settings")} | Msharfin</title>
+</svelte:head>
+
 <section>
     <h1>{i("titles.settings")}</h1>
     <h3><span class="title-ico"><Icon icon="ic:twotone-brush" /></span> {i("settings.appearance")}</h3>

@@ -52,6 +52,7 @@ button
 
 .ico
 	display: flex
+	color: inherit
 
 html[theme="dark"]
 	.logo
@@ -60,5 +61,22 @@ html[theme="dark"]
 		content: url("/images/welcome_dark.png")
 	.features-img
 		content: url("/images/sitting-reading_dark.png")
+	.error-pg img
+		content: url("/images/error_dark.png")
 
-		
+.error-pg
+	display: flex
+	align-items: center
+	justify-content: center
+	flex-direction: column
+	margin: 5rem
+	img
+		width: 18rem
+		animation: 35s gradient infinite
+	h2
+		margin-block: .25rem 0
+		font-size: 2.5rem
+		font-weight: bold
+	p 
+		color: $text-secondary-color
+		text-align: center

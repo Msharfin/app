@@ -36,12 +36,16 @@
     "logo": "Msharfin Logo",
     "welcome": "Man taking a selfie.",
     "features": "Man sitting and reading a book",
-    "theme-switch": "Toggle between light and dark mode."
+    "theme-switch": "Toggle between light and dark mode.",
+    "like": "Like post",
+    "comments": "Comments"
   },
   "titles": {
     "main": "Socialize with 🔒 privacy",
     "res-portal": "Resources portal",
-    "settings": "Settings"
+    "settings": "Settings",
+    "discover": "Discover",
+    "create": "Create a post"
   },
   "resources": {
     "res-nav": {
@@ -61,8 +65,8 @@
     "continue": "Continue",
     "notice": "This login session will last for a long time. if you want a temporary login session, please use incognito mode instead!",
     "short-pass": "Password is too short!",
-    "oauth":"Sign in with Google",
-    "or":"OR",
+    "oauth": "Sign in with Google",
+    "or": "OR",
     "statement": {
       "0": "By signing up you agree to",
       "1": "and"
@@ -70,12 +74,28 @@
   },
   "settings": {
     "appearance": "Appearance",
-    "theme": {"1":"Enable","2":"theme"},
+    "theme": {
+      "1": "Enable",
+      "2": "theme"
+    },
     "light": "dark",
     "dark": "light",
     "account": "Account",
     "acc-info": "Signed in as",
     "sign-out": "Sign out",
     "misc": "Miscellaneous"
-  }
+  },
+  "create": {
+    "post": "Post",
+    "place": "Tell your story!"
+  },
+  "app": {
+    "post-date": {
+      "0":"Posted",
+      "1": "at"
+    },
+    "delete": "Delete",
+    "share": "Share",
+    "refresh": "New posts, refresh to see them!"
+  } 
 }

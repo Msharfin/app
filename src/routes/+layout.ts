@@ -21,5 +21,9 @@ export const load = async ({ fetch, data, depends }) => {
     data: { session },
   } = await supabase.auth.getSession()
 
-  return { supabase, session }
+  const { data: profile } = await supabase
+  .from('users')
+  .select('id, name, avatar_url, slug')  
+
+  return { supabase, session, userProfile: profile? profile[0]: null }
 }

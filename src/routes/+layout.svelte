@@ -30,7 +30,7 @@ Please do not delete it (inlang will recreate it if needed). -->
 </script>
 
 {#if $navigating}
-  <Loading />
+<Loading />
 {/if}
 
 <slot />

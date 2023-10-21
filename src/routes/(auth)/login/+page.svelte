@@ -16,6 +16,7 @@
 
     let show = false
     let loading = false
+    let oauthLoading = false
     let disableButton = true
 
     let password: string
@@ -66,18 +67,20 @@
                 loading = false
                 return toast.error(error.message, errorToast)
             } 
-            return goto("/")
+            return goto("/app")
         } 
         loading = false
         captchaBtn.reset()
     }
 
     async function googleLogin() {
+        oauthLoading = true
         const { error } = await supabase.auth.signInWithOAuth({
             provider: "google"
         })
         if (error) {
             toast.error(error.message, errorToast)
+            loading = false
         }
     }
 
@@ -90,6 +93,7 @@
 <svelte:head>    
     <title>Msharfin | {i("nav.login")} </title>
 </svelte:head>
+
 <section>
 <form method="POST" on:submit|preventDefault={logIn} >
     <h2> <span class="title-ico"><Icon icon="material-symbols:login" /></span> {i("nav.login")}</h2>
@@ -124,7 +128,13 @@
 </form>
 <div class="sep">– {i("auth.or")} –</div>
 <div class="oauth">
-    <button class="auth_btn" on:click={googleLogin}><Icon icon="simple-icons:google" /><p>{i("auth.oauth")}</p></button>
+    <button disabled={oauthLoading} class="auth_btn" on:click={googleLogin}>
+            {#if oauthLoading}
+                <Icon icon="eos-icons:loading" class="loading-ico" />
+            {:else}
+                <Icon icon="simple-icons:google" /><p>{i("auth.oauth")}</p>
+            {/if}
+    </button>
 </div>
 <div class="notice">
     <Icon class="icognito" icon="solar:incognito-bold-duotone" /><p>{i("auth.notice")}</p>

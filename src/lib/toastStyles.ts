@@ -7,3 +7,9 @@ export const errorToast: object = {
     secondary: "red",
   },
 } 
+
+export const refreshToast: object = {
+  style:
+    "border-radius: 24px; background-color: var(--text-color); font-weight: bolder; color: var(--background-color); box-shadow: unset;",
+  icon: "↻"
+} 

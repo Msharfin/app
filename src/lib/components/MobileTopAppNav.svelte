@@ -4,14 +4,14 @@
 
 
 <header class="header-mobile">
-    <a class="logo" href="/app"><img src="/images/logo.png" alt={i("nav.logo_alt")}></a>
+    <a class="logo" href="/app"><img src="/images/logo.png" alt={i("nav.logo_alt")}> </a> | <b>ALPHA</b> 
 </header>
 
 
 <style lang="sass">
 
 .header-mobile
-  z-index: 999
+  z-index: 50
   position: sticky
   background-color: $background-color
   top: 0
@@ -22,4 +22,9 @@
   justify-content: center
   .logo img
     width: 2.75rem
+    margin-inline-end: .75rem 
+  b
+    margin-inline-start: .5rem   
+  &:lang(ar)
+    direction: ltr 
 </style>

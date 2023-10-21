@@ -17,7 +17,7 @@
 	width: 100vw
 	display: flex
 	background-color: hsla($background-color, 0.5)
-	z-index: 5
+	z-index: 999
 	backdrop-filter: blur(50px)
 	flex-direction: column
 	justify-content: center

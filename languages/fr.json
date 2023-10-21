@@ -24,7 +24,7 @@
   "nav": {
     "signin": "S'inscrire",
     "login": "Se connecter",
-    "enter": "L'appli"
+    "enter": "L'application"
   },
   "footer": {
     "lang": "Langage",
@@ -36,12 +36,16 @@
     "logo": "Logo de Msharfin",
     "welcome": "Homme prenant un selfie",
     "features": "Homme assis et lisant un livre",
-    "theme-switch": "Basculez entre le mode clair et foncé."
+    "theme-switch": "Basculez entre le mode clair et foncé.",
+    "like": "Aimez le poste",
+    "comments": "Commentaires"
   },
   "titles": {
     "main": "Socialiser avec 🔒 intimité",
     "res-portal": "Portail de ressources",
-    "settings": "Paramètres"
+    "settings": "Paramètres",
+    "create": "Créer un post",
+    "discover": "Découvrez"
   },
   "resources": {
     "res-nav": {
@@ -61,8 +65,8 @@
     "continue": "Continuer",
     "notice": "Cette connexion durera une longue période. Si vous souhaitez une connexion temporaire, veuillez utiliser le mode incognito à la place!",
     "short_pass": "Le mot de passe est trop court!",
-    "oauth":"Se connecter avec Google",
-    "or":"Où",
+    "oauth": "Se connecter avec Google",
+    "or": "Où",
     "statement": {
       "0": "En vous inscrivant, vous acceptez les",
       "1": "et"
@@ -70,12 +74,28 @@
   },
   "settings": {
     "appearance": "Apparence",
-    "theme": {"1":"Activer le thème", "2":""},
+    "theme": {
+      "1": "Activer le thème",
+      "2": ""
+    },
     "light": "sombre",
     "dark": "clair",
     "account": "Compte",
     "acc-info": "Connecté en tant que",
     "sign-out": "Déconnexion",
     "misc": "Autres"
-  }
+  },
+  "create": {
+    "post": "Postez",
+    "place": "Racontez votre histoire!"
+  },
+  "app": {
+    "post-date": {
+      "0":"Posté",
+      "1": "à"
+    },
+    "delete": "Supprimer",
+    "share": "Partager",
+    "refresh": "Nouveau posts, actualiser pour les voir!"
+  } 
 }
