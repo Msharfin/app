@@ -1,9 +1,8 @@
 <script lang="ts">
-    import { goto } from '$app/navigation'
     import { page } from '$app/stores'
     import PostMenu from '$lib/components/PostMenu.svelte'
     import { DateTime } from "$lib/luxon.min"
-  import { refreshToast } from '$lib/toastStyles.js';
+    import { refreshToast } from '$lib/toastStyles.js'
     import { i, language } from "@inlang/sdk-js"
     import toast from 'svelte-french-toast'
     import { fly } from 'svelte/transition'
@@ -32,7 +31,7 @@
 </script>
 
 <svelte:head>
-    <title>Discover | Msharfin</title>
+    <title>{i("titles.discover")} | Msharfin</title>
 </svelte:head>
 
 <section>

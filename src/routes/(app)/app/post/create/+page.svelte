@@ -5,6 +5,10 @@
 
 </script>
 
+<svelte:head>
+    <title>{i("titles.create")} | Msharfin</title>
+</svelte:head>
+
 <section>
     <h1>{i("titles.create")}</h1>
     <form method="post">

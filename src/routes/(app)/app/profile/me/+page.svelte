@@ -7,6 +7,10 @@
     let { session, userProfile } = data
 </script>
 
+<svelte:head>
+    <title>{i("titles.settings")} | Msharfin</title>
+</svelte:head>
+
 <section>
     <div class="profile-info">
         <div class="avatar">
