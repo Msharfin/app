@@ -51,7 +51,8 @@ section
             width: fit-content
             img
                 border-radius: 50%
-                width: 6rem        
+                width: 6rem   
+                height: 6rem      
         h2, h5
             margin: 0
             margin-block-start: 0.5rem

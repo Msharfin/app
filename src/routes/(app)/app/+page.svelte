@@ -94,6 +94,7 @@ section
             img
                 border-radius: 50%
                 width: 2.25rem
+                height: 2.25rem
             .user-info
                 margin-inline-start: .5rem
                 h4, h5
