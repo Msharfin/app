@@ -4,7 +4,7 @@
   import MobileTopAppNav from "$lib/components/MobileTopAppNav.svelte"
 
   export let data
-  let { session: {user:{ user_metadata }} }: any = data
+  let { userProfile }: any = data
 </script>
 
 <DesktopAppNav />
@@ -12,6 +12,6 @@
 
 <slot />
 
-<MobileBottomAppNav profile={JSON.parse(JSON.stringify(user_metadata))} />
+<MobileBottomAppNav profile={JSON.parse(JSON.stringify(userProfile))} />
 
 
