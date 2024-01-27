@@ -13,7 +13,9 @@ export default defineConfig({
     }), sveltekit(),
     // mkcert()
   ],
-
+  ssr: {
+    noExternal: ['@inlang/paraglide-js']
+  }
   css: {
     preprocessorOptions: {
       sass: {
