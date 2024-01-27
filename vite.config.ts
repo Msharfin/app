@@ -13,14 +13,14 @@ export default defineConfig({
     }), sveltekit(),
     // mkcert()
   ],
-  ssr: {
-    noExternal: ['@inlang/paraglide-js']
-  },
   css: {
     preprocessorOptions: {
       sass: {
         additionalData: '@use "src/variables.sass" as *',
       },
     },
+  },
+  ssr: {
+    noExternal: ['@inlang/paraglide-js']
   },
 })
