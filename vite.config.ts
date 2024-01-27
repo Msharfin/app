@@ -15,7 +15,7 @@ export default defineConfig({
   ],
   ssr: {
     noExternal: ['@inlang/paraglide-js']
-  }
+  },
   css: {
     preprocessorOptions: {
       sass: {
