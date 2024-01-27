@@ -1,4 +1,7 @@
-<script lang="ts">
+
+<p>Coming soon...</p>
+
+<!-- <script lang="ts">
     // @ts-ignore
     import HCaptcha  from 'svelte-hcaptcha'
     import Icon from "@iconify/svelte"
@@ -267,4 +270,4 @@ section
     .sep 
         color: $hover-color
         margin-block: .25rem .5rem
-</style>
+</style> -->
