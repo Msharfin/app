@@ -1,29 +1,32 @@
 <script>
-  import Icon from "@iconify/svelte"
-  import { i } from "@inlang/sdk-js"
+  	import Icon from "@iconify/svelte"
+  	import * as m from "$lang/messages"
+	import { languageTag } from "$lang/runtime"
+
 </script>
 
 <svelte:head>
-  <title>Msharfin | {i("titles.main")}.</title>
+  <title>Msharfin | {m.title_main()}.</title>
 </svelte:head>
 
 <div class="wrapper">
   <section class="welcome">
     <div>
       <h1>
-        <span>{i("main.moto.0")}</span>
-        {i("main.moto.1")} <br /><span class="title-ico"
-          ><Icon icon="iconamoon:eye-off-duotone" /></span
+        <span>{m.main_moto_0()}</span>
+        {m.main_moto_1()} <br /><span class="title-ico"
+          ><Icon icon="solar:lock-keyhole-bold-duotone" /></span
         >
-        {i("main.moto.2")}<span>.</span>
+        {m.main_moto_2()}<span>.</span>
       </h1>
+	  <img src="/images/patriotism.png" class="patriotism-img" alt="Made In Morocco" />
     </div>
-    <img src="/images/welcome.png" class="welcome-img" alt="{i("alt.welcome")}." />
+    <img src="/images/welcome.png" class="welcome-img" alt="{m.image_selfie_alt()}." />
   </section>
   <section class="features">
     <div class="title-wrap">
       <h2>
-        {i("main.features.title.0")} <span>{i("main.features.title.1")}</span>{i("main.features.title.2")}
+        {m.main_features_title_0()} <mark>{m.main_features_title_1()}</mark>{ "ar" === new String(languageTag())  ? "؟": "?"}
       </h2>
     </div>
     <div
@@ -31,22 +34,22 @@
 		"
     >
       <div class="img-wrap">
-        <img src="/images/sitting-reading.png" class="features-img" alt="{i("alt.features")}." />
+        <img src="/images/sitting-reading.png" class="features-img" alt="{m.main_features_0_detail()}." />
       </div>
       <div class="container-wrap">
         <div>
           <h2>
-            <span><Icon class="f-ico" icon="icon-park-twotone:personal-privacy" /></span>
-            {i("main.features.0.title")}
+            <span class="ico"><Icon icon="solar:shield-keyhole-bold-duotone" /></span>
+            {m.main_features_0_title()}
           </h2>
-          <p>{i("main.features.0.detail")}</p>
+          <p>{m.main_features_0_detail()}</p>
         </div>
         <div>
           <h2>
-            <span><Icon class="f-ico" icon="ic:twotone-security" /></span>
-            {i("main.features.1.title")}
+            <span class="ico"><Icon icon="solar:shield-bold-duotone" /></span>
+            {m.main_features_1_title()}
           </h2>
-          <p>{i("main.features.1.detail")}</p>
+          <p>{m.main_features_1_detail()}</p>
         </div>
       </div>
     </div>
@@ -64,24 +67,31 @@
 	flex-direction: column
 
 .welcome
-	height: 50vh
+	height: 100%
 	position: relative
 	display: flex
-	margin: 5rem auto
+	margin-block: 3rem
 	margin-inline: 10rem
 	display: flex
 	justify-content: space-between
 	align-items: center
 	user-select: none
-	h1
-		font-size: 60px
-		font-weight: 800
-		line-height: 1
-	img
+	div
+		display: flex
+		flex-direction: column
+		h1
+			@include title
+			font-size: 4rem
+			margin-block: 0 .5rem
+			line-height: 1.05
+		.patriotism-img
+			width: 13rem
+	.welcome-img
 		width: 20rem
 		animation: gradient 35s infinite
 
 	span, span *
+		@include title
 		color: red
 		animation: gradient 35s infinite
 
@@ -91,12 +101,14 @@
 	flex-direction: column
 	justify-content: center
 	text-align: center
-	.title-wrap
-		font-size: 1.5rem				
-		h2 span
+	.title-wrap 
+		font-size: 1.5rem
+		mark
+			font-family: "PlayFair Display"
+			background-color: hsla(0, 100%, 50%, 0.125)
 			color: red
-			font-weight: 800
-			animation: gradient 35s infinite
+			animation: gradient 35s infinite	
+
 
 .content-wrap
 	display: flex
@@ -114,22 +126,17 @@
 	h2
 		margin: 0 0 1rem 
 		font-size: 1.5rem
-		font-family: "Inter"
 		font-weight: 700 
 		display: inline-flex
 		align-items: center
-		&:lang(ar)
-			font-family: "Tajawal"
 		span
 			color: white
 			margin-inline-end: .75rem
 			border-radius: 8px
 			padding: .5rem
+			font-size: 1.75rem
 			background-color: red
 			animation: gradient 35s infinite
-			height: fit-content
-			:global(.f-ico)
-				display: block
 
 	p
 		margin: 0
@@ -150,18 +157,24 @@
 		&:lang(ar)
 			// This will remove the scaleX property while keeping the scale property
 			transform: scale(1.5)
+
 @media only screen and (max-width: 789px)
 	.welcome
-		margin: 3rem auto 3rem
+		margin-block: 1rem
 		margin-inline: 3rem
 		display: flex
 		flex-direction: column
 		justify-content: center
-		h1
-			font-size: 40px
-			text-align: center
-		img
-			width: 15rem
+		.welcome-img
+			width: 18rem
+		div
+			margin-block-end: 2rem 
+			h1
+				font-size: 2.75rem
+				text-align: center
+			.patriotism-img
+				width: 10rem
+				align-self: center
 	.content-wrap
 		flex-direction: column
 

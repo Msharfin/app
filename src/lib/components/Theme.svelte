@@ -1,30 +1,30 @@
 
 <script>
+	// Status : √ Refactored as of v0.1.4
+	
 	import Icon from "@iconify/svelte"
-	import { i } from "@inlang/sdk-js"
+	import * as m from "$lang/messages"
 	import { changeTheme, theme } from "$lib/theme"
+  	import { fly } from "svelte/transition"
 </script>
 
-<button title={i("alt.theme-switch")} class="theme_btn" on:click={() => changeTheme()}>
-	<span class="ico">
+<button title={m.nav_alt_theme({ theme: $theme === "dark"? m.theme_light(): m.theme_dark() })} class="theme-btn" on:click={() => changeTheme()}>
 	{#if $theme === "light"}
-		<Icon icon="line-md:moon-twotone" />
+		<span in:fly={{ y: 200, duration: 400 }} class="ico">
+			<Icon icon="solar:moon-bold-duotone" />
+		</span>
 	{:else}		
-		<Icon icon="line-md:sunny-outline-twotone" />
-	{/if}		
-	</span>
-
+		<span in:fly={{ y: 200, duration: 400 }} class="ico">
+			<Icon icon="solar:sun-2-line-duotone" />
+		</span>
+	{/if}
 </button>
 
 <style lang="sass">
-.theme_btn
-	border: none
-	border-radius: 75px 
-	transition: all .5s ease
-	color: $text-secondary-color
-	background: none
-	font-size: 24px
-	padding: .25rem
-	&:hover
-		background-color: $container-color
+.theme-btn
+	@include button
+	@include secondaryBtn($color: $text-color)
+	font-size: 1.75rem
+	padding: .5rem
+	border-radius: 50%
 </style>

@@ -2,7 +2,7 @@
     // @ts-ignore
     import HCaptcha  from 'svelte-hcaptcha'
     import Icon from "@iconify/svelte"
-    import { i } from "@inlang/sdk-js"
+    import * as m from "$lang/messages"
     import toast from "svelte-french-toast"
     import { fly } from "svelte/transition"
     import { errorToast } from "$lib/toastStyles"
@@ -37,40 +37,34 @@
     }
 
     async function logIn() {
-        if (password.length < 8) {
-            toast.error(i("auth.short-pass"),
-            errorToast)
-        } else {
-            loading = true
-            const tokenVerify = await fetch("/auth/hcaptcha", {
-                method: "POST",
-                headers: {
-                "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    captcha: captcha
-                }),
-            })
-            const response = await tokenVerify.json()
-            if (response?.error) {
-                loading = false
-                return toast.error(response?.error, errorToast)
+        loading = true
+        const tokenVerify = await fetch("/auth/hcaptcha", {
+            method: "POST",
+            headers: {
+            "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                captcha: captcha
+            }),
+        })
+        const response = await tokenVerify.json()
+        if (response?.error) {
+            loading = false
+            return toast.error(response?.error, errorToast)
+        }
+        const { data, error } = await supabase.auth.signInWithPassword({
+            email: email,
+            password: password,
+            options: {
+                captchaToken: captcha,
             }
-            const { data, error } = await supabase.auth.signInWithPassword({
-                email: email,
-                password: password,
-                options: {
-                    captchaToken: captcha,
-                }
-                })
-            if (error) {
-                loading = false
-                return toast.error(error.message, errorToast)
-            } 
-            return goto("/app")
+            })
+        if (error) {
+            loading = false
+            captchaBtn.reset()
+            return toast.error(error.message, errorToast)
         } 
-        loading = false
-        captchaBtn.reset()
+        return goto("/app")
     }
 
     async function googleLogin() {
@@ -91,23 +85,23 @@
 </script>
 
 <svelte:head>    
-    <title>Msharfin | {i("nav.login")} </title>
+    <title>Msharfin | {m.auth_login_title()} </title>
 </svelte:head>
 
 <section>
 <form method="POST" on:submit|preventDefault={logIn} >
-    <h2> <span class="title-ico"><Icon icon="material-symbols:login" /></span> {i("nav.login")}</h2>
+    <h2> <span class="title-ico"><Icon icon="solar:login-2-bold-duotone" /></span> {m.auth_login_title()}</h2>
     <div class="email_auth">
-        <label for="email">{i("auth.email")}</label>
+        <label for="email">{m.auth_email()}</label>
         <input bind:value={email} id="email" type="email" name="email" autocomplete="email" placeholder="ali@example.ma">
         {#if email}
-        <label transition:fly={{ y: 200, duration: 200 }} for="pass">{i("auth.password")}</label>
+        <label transition:fly={{ y: 200, duration: 200 }} for="pass">{m.auth_password()}</label>
         <div transition:fly={{ y: 200, duration: 200 }} class="pass">
             <input bind:value={password} bind:this={pass} maxlength=12 id="pass" placeholder="********" autocomplete="current-password" type="password" name="password">
             {#if show === true}
-                <button title={i("auth.show-pass")} on:click={() => showPass()}><Icon class="show-pass" icon="mdi:hide" /></button>
+                <button title={m.auth_hide_pass()} on:click={() => showPass()}><Icon class="show-pass ico" icon="solar:eye-closed-bold" /></button>
             {:else}  
-                <button title={i("auth.show-pass")} on:click={() => showPass()}><Icon class="show-pass" icon="mdi:show" /></button>    
+                <button title={m.auth_show_pass()} on:click={() => showPass()}><Icon class="show-pass ico" icon="solar:eye-bold" /></button>    
             {/if}
         </div>
         {/if}          
@@ -119,25 +113,25 @@
             {#if loading}
                 <Icon icon="eos-icons:loading" class="loading-ico" />
             {:else}
-                {i("auth.continue")}
+                {m.auth_confirm()}
             {/if}
         </button>
         {/if}
     </div>        
 
 </form>
-<div class="sep">– {i("auth.or")} –</div>
+<div class="sep">– {m.auth_seperator()} –</div>
 <div class="oauth">
     <button disabled={oauthLoading} class="auth_btn" on:click={googleLogin}>
             {#if oauthLoading}
                 <Icon icon="eos-icons:loading" class="loading-ico" />
             {:else}
-                <Icon icon="simple-icons:google" /><p>{i("auth.oauth")}</p>
+                <Icon icon="grommet-icons:google" /><p>{m.auth_google_oauth()}</p>
             {/if}
     </button>
 </div>
 <div class="notice">
-    <Icon class="icognito" icon="solar:incognito-bold-duotone" /><p>{i("auth.notice")}</p>
+    <Icon class="icognito" icon="solar:incognito-bold-duotone" /><p>{m.auth_login_safety_notice()}</p>
 </div>  
 </section>
 
@@ -149,6 +143,7 @@ section
     align-items: center
     justify-content: center
     h2
+        @include title
         text-align: center
         font-size: 2.5rem
         .title-ico
@@ -182,16 +177,16 @@ section
             display: flex
             padding: 0
             align-items: center
+            justify-content: space-between
             button
                 background: none
                 font-size: 1.25rem
                 border: none
                 padding-block: .25rem
-                border-radius: 48px
-                vertical-align: middle
+                margin-inline-end: .5rem
+                border-radius: 50%
                 :global(.show-pass)
                     color: gray            
-                    display: block
                 &:hover
                     background-color: $hover-container-color
 
@@ -215,6 +210,7 @@ section
             color: $background-color
             width: 100%
             font-weight: bold
+            margin-block-start: .25rem
             font-size: 1.25rem
             vertical-align: middle
             :global(.loading-ico)

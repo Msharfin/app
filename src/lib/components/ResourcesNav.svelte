@@ -1,17 +1,17 @@
 <script>
   import Icon from "@iconify/svelte"
-  import { i } from "@inlang/sdk-js"
-  import { page } from "$app/stores";
+  import * as m from "$lang/messages"
+  import { page } from "$app/stores"
 </script>
 
 <div>
     {#if $page.url.pathname !== "/resources"}
-        <a href="/resources"><Icon icon="ion:arrow-back" /></a>
+        <a href="/resources"><Icon icon="solar:arrow-left-line-duotone" /></a>
     {:else}
-        <a href="/resources"><Icon icon="ic:twotone-home" /></a>
+        <a href="/resources"><Icon icon="solar:home-2-line-duotone" /></a>
     {/if}
     | 
-    <h3>{i(`resources.res-nav.${$page.url.pathname}`)}</h3>
+    <h3>{$page.url.pathname.endsWith("terms")? m.title_tos() : m.title_privacy()}</h3>
 </div>
 
 <style lang="sass">
@@ -22,23 +22,23 @@ div
     align-items: center
     color: $container-color
     a
-        color: $text-secondary-color
-        display: inline-flex
-        align-items: center
+        @include secondaryBtn
         text-decoration: none
+        display: flex
+        border-radius: 50%
+        padding: .25rem
         margin-inline-end: .5rem
         font-size: 2rem
         &:lang(ar)
             transform: scaleX(-1)
-        &:hover
-            color: $text-color
+
     h3  
         font-size: 1.5rem
         color: $text-secondary-color
         margin-inline-start: .5rem
 @media screen and (max-width: 789px)
     div
-        margin-inline-start: 3rem
+        margin-inline-start: 2.5rem
 </style>
 
 

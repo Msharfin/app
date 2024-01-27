@@ -1,101 +1,57 @@
 {
-  "main": {
-    "moto": {
-      "0": "Socialize",
-      "1": "with",
-      "2": "privacy"
-    },
-    "features": {
-      "0": {
-        "title": "Privacy",
-        "detail": "We respect your right to access and delete your data under Moroccan Law No. 09-08 on the Protection of Individuals with Regard to the Processing of Personal Data."
-      },
-      "1": {
-        "title": "Safety",
-        "detail": "With built-in filters, you can enjoy social media and control the content you consume without impacting yourself negatively or in a bad way."
-      },
-      "title": {
-        "0": "Why choose",
-        "1": "Msharfin",
-        "2": "?"
-      }
-    }
-  },
-  "nav": {
-    "signin": "Sign In",
-    "login": "Log In",
-    "enter": "Enter app"
-  },
-  "footer": {
-    "lang": "Language",
-    "tos": "Terms of use",
-    "policy": "Privacy policy",
-    "status": "Services status"
-  },
-  "alt": {
-    "logo": "Msharfin Logo",
-    "welcome": "Man taking a selfie.",
-    "features": "Man sitting and reading a book",
-    "theme-switch": "Toggle between light and dark mode.",
-    "like": "Like post",
-    "comments": "Comments"
-  },
-  "titles": {
-    "main": "Socialize with 🔒 privacy",
-    "res-portal": "Resources portal",
-    "settings": "Settings",
-    "discover": "Discover",
-    "create": "Create a post"
-  },
-  "resources": {
-    "res-nav": {
-      "/resources": "Home",
-      "/resources/tos": "Terms of use",
-      "/resources/privacy_policy": "Privacy Policy"
-    },
-    "home": "Welcome to the 📜 Resources portal! The place where you can access our documentation, policies... Start by choosing what you want to read:"
-  },
-  "auth": {
-    "email": "E-mail address",
-    "password": "Password",
-    "birth": "Date of birth",
-    "username": "Username",
-    "confirm-pass": "Confirm password",
-    "show-pass": "Hide/show password",
-    "continue": "Continue",
-    "notice": "This login session will last for a long time. if you want a temporary login session, please use incognito mode instead!",
-    "short-pass": "Password is too short!",
-    "oauth": "Sign in with Google",
-    "or": "OR",
-    "statement": {
-      "0": "By signing up you agree to",
-      "1": "and"
-    }
-  },
-  "settings": {
-    "appearance": "Appearance",
-    "theme": {
-      "1": "Enable",
-      "2": "theme"
-    },
-    "light": "dark",
-    "dark": "light",
-    "account": "Account",
-    "acc-info": "Signed in as",
-    "sign-out": "Sign out",
-    "misc": "Miscellaneous"
-  },
-  "create": {
-    "post": "Post",
-    "place": "Tell your story!"
-  },
-  "app": {
-    "post-date": {
-      "0":"Posted",
-      "1": "at"
-    },
-    "delete": "Delete",
-    "share": "Share",
-    "refresh": "New posts, refresh to see them!"
-  } 
-}
+    "$schema": "https://inlang.com/schema/inlang-message-format",
+    "main_moto_0": "Socialize",
+    "main_moto_1": "with",
+    "main_moto_2": "privacy",
+    "main_features_title_0": "Why choose",
+    "main_features_title_1": "Msharfin",
+    "main_features_0_title": "Privacy",
+    "main_features_1_title": "Safety",
+    "main_features_0_detail": "We respect your right to access and delete your data under Moroccan Law No. 09-08 on the Protection of Individuals with Regard to the Processing of Personal Data.",
+    "main_features_1_detail": "With built-in filters, you can enjoy social media and control the content you consume without impacting yourself negatively or in a bad way.",
+    "nav_alt_theme": "Enable {theme} theme",
+    "nav_alt_auth": "Sign up/Log in",
+    "nav_alt_enter_app": "Enter the App",
+    "alt_logo": "{brand} logo.",
+    "alt_lang_switch": "Website Language",
+    "alt_theme_switch": "Toggle between light and dark mode",
+    "title_tos": "Terms of service",
+    "title_privacy": "Privacy policy",
+    "title_site_status": "Services status",
+    "title_main": "Socialize with 🔒 Privacy",
+    "image_selfie_alt": "Ali taking a selfie.",
+    "image_reading_alt": "Ahmad reading a book.",
+    "app_post_btn_like": "Like",
+    "app_post_btn_comments": "See comments",
+    "app_post_btn_delete": "Delete",
+    "app_post_btn_share": "Share",
+    "app_post_created": "Posted {period} at {time}",
+    "app_title_discover": "Discover",
+    "app_title_create": "Create a post",
+    "app_title_settings": "Settings",
+    "res_portal_title": "Resources portal",
+    "res_portal_btn_download": "Download as PDF",
+    "res_portal_home":"Welcome to the 📜 Resources portal! The place where you can access our documentation, policies... Start by choosing what you want to read:",
+    "auth_signup_title": "Sign up",
+    "auth_login_title": "Log in",
+    "auth_email": "E-mail Address",
+    "auth_password": "Password",
+    "auth_username": "Username",
+    "auth_confirm_pass": "Confirm password",
+    "auth_show_pass": "Show password",
+    "auth_hide_pass": "Hide password",
+    "auth_confirm": "Continue",
+    "auth_login_safety_notice": "This login session will last a very long time, if you want a temporary login please use Incognito mode instead!",
+    "auth_google_oauth": "Sign in with Google",
+    "auth_seperator": "OR",
+    "auth_signup_statement": "By clicking 'Continue', you a {tos} et la {privacy} de Msharfin.",
+    "auth_signout": "Sign out",
+    "auth_info": "Logged in as",
+    "settings_look": "Appearence",
+    "settings_theme": "Theme",
+    "settings_acc": "Account",
+    "settings_misc": "Other",
+    "settings_lang": "Language",
+    "theme_light": "Light",    
+    "theme_dark": "Dark"
+  }

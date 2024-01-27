@@ -1,9 +1,18 @@
-import inlangPlugin from "@inlang/sdk-js/adapter-sveltekit";
-import { sveltekit } from "@sveltejs/kit/vite";
-import { defineConfig } from "vite";
+import { sveltekit } from "@sveltejs/kit/vite"
+import { defineConfig } from "vite"
+import { paraglide } from "@inlang/paraglide-js-adapter-vite"
+
+// import mkcert from "vite-plugin-mkcert"
 
 export default defineConfig({
-  plugins: [inlangPlugin(), sveltekit()],
+  // server: { https:true },
+  plugins: [
+    paraglide({
+      project: "./project.inlang",
+      outdir: "./src/paraglide",
+    }), sveltekit(),
+    // mkcert()
+  ],
 
   css: {
     preprocessorOptions: {
@@ -12,4 +21,4 @@ export default defineConfig({
       },
     },
   },
-});
+})

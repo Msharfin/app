@@ -4,23 +4,41 @@
     100%
         filter: hue-rotate(360deg)
 
+
+@font-face 
+    font-family: "TajInAr"
+    font-weight: 400
+    src: url(https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzSBC45I.woff2) format('woff2')
+    unicode-range: U+0600-06FF
+
+@font-face 
+    font-family: "TajInAr"
+    font-weight: 700
+    src: url(https://fonts.gstatic.com/s/tajawal/v9/Iurf6YBj_oCad4k1l4qkHrRpiYlJ.woff2) format('woff2')
+    unicode-range: U+0600-06FF
+
 :root
     --text-color: hsl(0, 0%, 10%)
-    --button-text-color: hsl(0,0%,100%)
-    --text-secondary-color: hsl(0,0%,50%)
-
-    --hover-color: hsl(0, 0%, 50%)
-    --hover-secondary-color: hsl(0, 0%, 80%)
+    --text-secondary-color: hsl(200,10%,60%)
 
     --background-color: hsl(0, 0%, 100%)
-    --hover-container-color: hsl(0, 0%, 70%)
-    --container-color: hsl(0, 0%, 90%)
+    
+    --hover-color: hsl(200, 10%, 50%)
+    --hover-secondary-color: hsl(200, 0%, 80%)
 
-// Light mode
+    --hover-container-color: hsl(200, 10%, 80%)
+    --container-color: hsl(200, 10%, 95%)
+
+    --nav-bar-button: hsl(200, 20%, 20%)
+    --nav-bar-button-hover: hsl(200, 20%, 30%)
+
+// theme_light mode
 $text-color: var(--text-color)
 $text-secondary-color: var(--text-secondary-color)
-$button-text-color: var(--button-text-color)
 
+$button-text-color: var(--background-color)
+    
+$container-color: var(--container-color)
 $hover-container-color: var(--hover-container-color)
 
 $hover-color: var(--hover-color)
@@ -28,13 +46,13 @@ $hover-secondary-color: var(--hover-secondary-color)
 
 $background-color: var(--background-color)
 
-$container-color: var(--container-color)
+$nav-bar-button: var(--nav-bar-button)
+$nav-bar-button-hover: var(--nav-bar-button-hover)
 
 // Dark mode
 html[theme="dark"]
-    --text-secondary-color: hsl(200, 20%, 70%)
     --text-color: hsl(200, 20%, 90%)
-    --button-text-color: hsl(0,0%,10%)
+    --text-secondary-color: hsl(200, 20%, 70%)
 
     --hover-color: hsl(200, 20%, 65%)
     --secondary-hover-color: hsl(200, 20%, 100%)
@@ -43,3 +61,45 @@ html[theme="dark"]
 
     --container-color: hsl(200, 20%, 20%)
     --hover-container-color: hsl(200, 20%, 16%)
+
+    --nav-bar-button: hsl(200, 20%, 80%)
+    --nav-bar-button-hover: hsl(200, 20%, 60%)
+
+// - Mixins -   
+
+@mixin button
+    border: none
+    background: none
+    border-radius: 12px
+    color: inherit
+    cursor: pointer
+    transition: all .5s ease
+
+@mixin secondaryBtn($color: $text-secondary-color, $font-weight: bold, $hover-color: $container-color)
+    font-weight: $font-weight
+    color: $color
+    &:hover
+        background-color: $hover-color
+
+@mixin mainBtn
+    font-weight: bold
+    color: $background-color
+    background-color: $text-color
+    &:hover
+        background-color: $nav-bar-button-hover
+
+@mixin title
+    font-family: "PlayFair Display", "Noto Color Emoji"
+    font-weight: bold
+    &:lang(ar)
+        font-family: "TajInAr", "Inter", "Noto Color Emoji"
+        font-weight: bold
+
+@mixin page
+    display: flex
+    flex-direction: column
+    flex: 1
+    margin-block-start: .5rem
+    margin-inline: 1rem
+
+    

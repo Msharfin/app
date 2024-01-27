@@ -1,19 +1,29 @@
 
 <script>
-    import { i } from "@inlang/sdk-js"
     import Icon from "@iconify/svelte"
     import { page } from "$app/stores"
-    import Theme from "$lib/components/Theme.svelte"
-
+	import { goto } from "$app/navigation"
+    import * as m from "$lang/messages"
 </script>
 
 <header>
-    <div>
-        <a class="arrow" href="/"><Icon icon="ion:arrow-back" /></a>
-        |
-        <a href={$page.url.pathname} class="logo"><img src="/images/logo.png" alt={i("nav.logo_alt")}></a>
+    <div class="left">
+        <button class="arrow" on:click={() => goto("/")} ><span class="ico"><Icon icon="solar:arrow-left-line-duotone" /></span></button>
+        <a href={$page.url.pathname}><img class="logo" src="/images/logo.png" alt={m.alt_logo({ brand: m.main_features_title_1() })}></a>
     </div>
-    <Theme />
+    <div class="right">
+    <button class="sign-up" on:click={()=>{
+        $page.url.pathname === "/login"? goto("/signup"): goto("/login")
+    }}>
+        {#if $page.url.pathname === "/login"}
+            <span class="ico"><Icon icon="solar:user-plus-rounded-linear" /></span> <p>{m.auth_login_title()}</p>
+        {:else}
+            <span class="ico"><Icon icon="solar:login-2-linear" /></span> <p>{m.auth_login_title()}</p>
+        {/if}
+        
+    </button>
+    </div>
+    
 </header>
 
 <slot />
@@ -26,25 +36,49 @@ header
     align-items: center
     user-select: none
     justify-content: flex-start
-    div
+    .left
+        display: flex
+        align-items: center
         margin-inline-end: auto
-    .logo
+    .right
+        display: flex
+        align-items: center
+        // div
+        //     margin-inline-start: .5rem
+        .sign-up
+            // margin-inline-end: .5rem
+            display: flex
+            color: $text-color
+            align-items: center
+            justify-content: center
+            font-weight: 600
+            padding-inline: .75rem
+            p, .ico
+                font-size: 1.25rem
+            p
+                margin: .5rem
+            &:hover
+                background-color: $container-color
+    a
         margin-inline-start: 1rem
-        img
+        .logo
             width: 3rem
+            vertical-align: bottom
     .arrow
         color: $text-color
         display: inline-flex
         align-items: center
         text-decoration: none
-        margin-inline-end: 1rem
+        margin-inline-end: .25rem
         transition: .3s all ease
+        border-radius: 50%
+        padding: .25rem
         font-size: 2rem
         &:lang(ar)
             transform: scaleX(-1)
         &:hover
-            color: $hover-color
+            background-color: $container-color
 @media screen and (max-width: 789px)
     header
-        padding: 2rem 2rem
+        padding: 2rem 1rem
 </style>

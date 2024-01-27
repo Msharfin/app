@@ -1,14 +1,11 @@
 <script lang="ts">
-    import { goto } from '$app/navigation'
-    import Icon from '@iconify/svelte'
-    import { i } from '@inlang/sdk-js'
 
     export let data
     let { session, userProfile } = data
 </script>
 
 <svelte:head>
-    <title>{i("titles.settings")} | Msharfin</title>
+    <title>Profile de  | Msharfin</title>
 </svelte:head>
 
 <section>
@@ -17,14 +14,13 @@
         {#if userProfile?.avatar_url}
             <img src="{userProfile?.avatar_url}" alt="">
         {:else}
-            <img src="" alt="">
+            <img src="/images/no_pfp.png" alt="">
         {/if}
         </div>
 
         <h2>{userProfile?.name}</h2>
         <h5>@{userProfile?.slug}</h5>
     </div>
-    <button on:click={()=>goto("/app/settings")}><span class="ico"><Icon icon="ph:gear-duotone" /></span> <p> {i("titles.settings")}</p></button>
 </section>
 
 <style lang="sass">

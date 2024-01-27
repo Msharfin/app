@@ -1,27 +1,22 @@
 <script>
     import Language from "$lib/components/Language.svelte"
-	import Theme from "$lib/components/Theme.svelte"
-    import {i} from "@inlang/sdk-js"
-	import { page } from "$app/stores";
+    import * as m from "$lang/messages"
+	import { page } from "$app/stores"
   	import { version } from "$lib"
 
 </script>
 
 <footer>
 	<div class="upper">
-	<h3>v{version}</h3>
-	<section class="wrapper">
-		<div>{i("footer.lang")}: <Language /></div>
-		|
-		<div><Theme /></div>
-	</section>
+		<h3>v{version}</h3>
+		<div><Language /></div>
 	</div>
 	{#if $page.url.pathname === "/"}
 	<div class="lower">
 		<div>
-			<a href="/resources" class="link">{i("titles.res-portal")}</a>
+			<a href="/resources" class="link">{m.res_portal_title()}</a>
 			&#0149;
-			<a target="_blank" rel="noopener noreferrer" href="https://msharfin.statuspage.io/" class="link">{i("footer.status")}</a>
+			<a target="_blank" rel="noopener noreferrer" href="https://msharfin.statuspage.io/" class="link">{m.title_site_status()}</a>
 		</div>
 	</div>		
 	{/if}
@@ -45,7 +40,11 @@ footer
 		color: $text-secondary-color
 		font-size: 1rem
 		font-weight: 400
-
+	div
+		color: $text-secondary-color
+		display: flex
+		align-items: center
+		margin-inline-start: auto
 .lower
 	display: flex
 	align-items: center
@@ -61,18 +60,6 @@ footer
 			margin-inline-start: .5rem	
 		&:first-child
 			margin-inline-end: .5rem	
-.wrapper
-	color: $text-secondary-color
-	display: flex
-	align-items: center
-	margin-inline-start: auto
-	div 
-		display: flex
-		align-items: center
-		&:last-child
-			margin-inline-start: .5rem
-		&:first-child
-			margin-inline-end: .5rem
 
 @media screen and (max-width: 1024px)
 	footer

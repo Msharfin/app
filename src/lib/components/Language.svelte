@@ -1,70 +1,55 @@
-<script>
-// @ts-nocheck
-
-	import { browser } from '$app/environment'
-	import { language, languages, switchLanguage } from '@inlang/sdk-js'
+<script lang="ts">
 	import Icon from '@iconify/svelte'
-	import data from "$lib/components/lang_list.json"
+	import { languageSelection } from "$lib/components/dropdown.json" 
+	import { fly } from 'svelte/transition'
+	import { setLanguageTag, availableLanguageTags, languageTag, onSetLanguageTag } from '$lang/runtime'
+	import * as m from "$lang/messages"
 
-	let div
+	let langList: any = languageSelection
 
 	let show = "none"
-	function changeLang(locale) {
-		if (browser) {localStorage.setItem("language", locale)}
-		switchLanguage(locale)
-	}
 
 	function showList() {
 		show = show === "flex" ? "none": "flex"
 	}
 
-	if (browser) {
-		// https://thewebdev.info/2022/02/13/how-to-hide-a-div-when-it-loses-focus-with-javascript/
-		document.onmouseup = (e) => {
-		  if (e.target !== div && div) {
-		    div.style.display = "none"
-		    flip = false
-		  }
-		}
-
-		if (localStorage.getItem("language") === undefined) {
-			localStorage.setItem("language", document.documentElement.lang)
-		}
-	}
-
 	$: flip = show === "flex" ? true: false
-
 </script>
 
-<div class="wrap">	
-<div class="lang_choice" bind:this={div} style="display: {show};">
-{#each languages as lang }
-	{#if lang !== language}
-		<button on:click={() => changeLang(lang)} >{data[lang]} <span>{lang}</span></button>
+<div class="wrap" title={m.alt_lang_switch()}> 
+	{#if flip}
+		<!-- TODO: Fix focus out -->
+		<div transition:fly={{ y: 50 , duration: 200}} class="lang_choice" on:focusout={() => flip=false}>
+		{#each availableLanguageTags as lang }
+			{#if lang !== languageTag()}
+				<button on:click={() => {
+					flip = false
+					setLanguageTag(lang)
+				}} >{langList[lang]} <span>{lang}</span></button>
+			{/if}
+		{/each}
+		</div>
 	{/if}
-{/each}
-</div>
-<button class="lang_btn" on:click={() => showList()}>{data[language]} <span class:flip={flip} class="ico"><Icon icon="ep:arrow-down-bold" class="arrow" /></span></button></div>	
+	<button class="lang_btn" on:click={() => showList()}>{langList[languageTag()]} <span class:flip={flip} class="ico"><Icon icon="ep:arrow-down-bold" class="arrow" /></span></button>
+</div>	
 
 
 <style lang="sass">
 .lang_btn, .lang_choice button
-	border: none
+	color: $text-color
 	background-color: $container-color
-	padding: .35rem .5rem .5rem
+	padding: 0 .75rem
 	border-radius: 12px 
 	transition: all .5s ease
 	font-weight: 600
-	font-size: 13px
-	width: 5rem
-	height: 2rem
-	&:lang(ar)
-		direction: ltr
+	font-size: .85rem
+	width: 6rem
+	height: 2.25rem
 	&:hover
 		background-color: $hover-container-color
-.lang_btn
+.lang_btn, .lang_choice button
 	display: flex
-	justify-content: center
+	justify-content: space-between
 	align-items: center
 
 .lang_choice
@@ -88,15 +73,16 @@
 			border-bottom-right-radius: 12px
 		span
 			font-family: "Inter" !important
-			color: hsl(0, 0%, 60%)
+			color: $text-secondary-color
 			margin-left: .25rem
 
 .ico
 	margin-inline-start: .5rem
 
-.flip > :global(.arrow)
-	transform: scaleY(-1)
-	transition: transform .2s ease
+.flip
+	:global(.arrow)
+		transform: scaleY(-1)
+		transition: transform .2s ease
 
 :global(.arrow)
 	color: $text-secondary-color

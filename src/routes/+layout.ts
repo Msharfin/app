@@ -1,29 +1,37 @@
-/* This file was created by inlang.
-It is needed in order to circumvent a current limitation of SvelteKit. See https://github.com/inlang/inlang/issues/647
-You can remove this comment and modify the file as you like. We just need to make sure it exists.
-Please do not delete it (inlang will recreate it if needed). */
-
 import { PUBLIC_SUPABASE_KEY, PUBLIC_SUPABASE_URL } from '$env/static/public'
-import { createSupabaseLoadClient } from '@supabase/auth-helpers-sveltekit'
-import type { Database } from '../../database.types'
+import type { LayoutLoad } from './$types'
+import { createBrowserClient, isBrowser, parse } from '@supabase/ssr'
 
-export const load = async ({ fetch, data, depends }) => {
+export const load: LayoutLoad = async ({ fetch, data, depends }) => {
   depends('supabase:auth')
 
-  const supabase = createSupabaseLoadClient<Database>({
-    supabaseUrl: PUBLIC_SUPABASE_URL,
-    supabaseKey: PUBLIC_SUPABASE_KEY,
-    event: { fetch },
-    serverSession: data.session,
+  const supabase = createBrowserClient(PUBLIC_SUPABASE_URL, PUBLIC_SUPABASE_KEY, {
+    global: {
+      fetch,
+    },
+    cookies: {
+      get(key) {
+        if (!isBrowser()) {
+          return JSON.stringify(data.session)
+        }
+
+        const cookie = parse(document.cookie)
+        return cookie[key]
+      },
+    },
   })
 
   const {
     data: { session },
   } = await supabase.auth.getSession()
 
-  const { data: profile } = await supabase
-  .from('users')
-  .select('id, name, avatar_url, slug').eq("id", session?.user.id) 
-
-  return { supabase, session, userProfile: profile? profile[0]: null }
+  let user: any
+  if (session) {
+    user = await supabase.from("users").select("*").eq("id", session?.user.id)
+  }
+  
+  return {
+    supabase, session, userProfile: session ? user.data[0]: {}
+  }
 }
+

@@ -1,16 +1,16 @@
 <script>
-    import { i } from "@inlang/sdk-js"
     import { goto } from "$app/navigation"
     import Icon from "@iconify/svelte"
+    import * as m from "$lang/messages"
 </script>
 
 <section>
     <p>
-    {i("resources.home")}
+    {m.res_portal_home()}
     </p>
     <div>
-        <button on:click={() => goto("/resources/tos")}><p>{i("footer.tos")}</p><span class="ico"><Icon icon="mingcute:paper-line" /></span></button>
-        <button on:click={() => goto("/resources/privacy_policy")}><p>{i("footer.policy")}</p><span class="ico"><Icon icon="codicon:law" /></span></button>
+        <button on:click={() => goto("/resources/terms")}><p>{m.title_tos()}</p><span class="ico"><Icon icon="solar:document-text-outline" /></span></button>
+        <button on:click={() => goto("/resources/privacy")}><p>{m.title_privacy()}</p><span class="ico"><Icon icon="solar:shield-keyhole-outline" /></span></button>
     </div>
 </section>
 
@@ -38,6 +38,9 @@ section
             border: none
             border-radius: 24px
             margin-inline: 1rem 1rem
+            display: flex
+            align-items: center
+            justify-content: center
             background-color: $container-color 
         button:hover
             background-color: $hover-container-color 
@@ -45,14 +48,12 @@ section
                 transform: scale(1.2)
         .ico
             transition: .5s all ease
+            left: 20%
+            color: $text-secondary-color
             position: absolute
-            inset-inline-start: 20%
-            inset-block-start: 0
-            display: block       
-            color: hsl(0, 0%, 50%)
             z-index: 0
             opacity: 0.4
-            font-size: 5rem  
+            font-size: 5rem 
 
 @media screen and (max-width: 789px)
     section
@@ -61,7 +62,4 @@ section
             flex-direction: column
             button:last-child
                 margin-top: 1rem
-@media screen and (max-width: 400px)
-    .ico
-        inset-inline-start: 10%
 </style>

@@ -1,11 +1,11 @@
 
 <script>
-	import Icon from "@iconify/svelte";
-	import { i } from "@inlang/sdk-js";
+	import Icon from "@iconify/svelte"
+	import * as m from "$lang/messages"
 </script>
 
 <div class="loading">
-	<img src="/images/logo.png" class="logo" alt={i("nav.logo_alt")}>
+	<img src="/images/logo.png" class="logo" alt={m.alt_logo({ brand: m.main_features_title_1 })}>
 	<Icon icon="eos-icons:loading" class="loading-ico" />
 </div>	
 

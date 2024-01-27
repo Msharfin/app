@@ -5,9 +5,22 @@
 html:lang(ar)
 	direction: rtl
 
+emoji-picker
+	--emoji-font-family: "Noto Color Emoji"
+	--input-border-size: 0px
+	--border-color: none
+	--indicator-color: var(--nav-bar-button)
+	height: 15rem
+	width: 100%
+
+
 html
 	color: $text-color
 	background-color: $background-color
+	*:lang(ar)
+		font-family: "TajInAr", "Inter", "Noto Color Emoji"
+	*
+		font-family: "Inter", "Noto Color Emoji"
 
 body
 	position: relative
@@ -16,14 +29,10 @@ body
 	margin: 0
 	min-height: 100vh
 
-h1, h2, span
-	font-family: "PlayFair Display", "Noto Color Emoji"
-
-*:lang(ar), *:lang(ar) > span, *:lang(ar) > h1, *:lang(ar) > h2
-	font-family: "Tajawal", "Noto Color Emoji"
-
-*
-	font-family: "Inter", "Noto Color Emoji"
+@media screen and (min-width: 790px)
+	.app-page
+		padding: 4rem 12rem
+		margin: 0
 
 img
 	user-select: none
@@ -36,16 +45,14 @@ a
 .link
 	vertical-align: baseline
 	&::after
-		content: " \2197"
 		font-family: "Inter"
+		content: " \2197"
 		font-size: 1.25rem
 	&:lang(ar):after
 		content: " \2196"
 
 button
-	color: $text-color
-	cursor: pointer
-	transition: all .5s ease
+	@include button
 
 .title-ico
 	vertical-align: middle
@@ -53,16 +60,20 @@ button
 .ico
 	display: flex
 	color: inherit
-
+	
 html[theme="dark"]
 	.logo
-		filter: invert(1)
+		content: url("/images/logo_dark.png")
+	.logo-dark
+		content: url("/images/logo.png")
 	.welcome-img
 		content: url("/images/welcome_dark.png")
 	.features-img
 		content: url("/images/sitting-reading_dark.png")
 	.error-pg img
 		content: url("/images/error_dark.png")
+	.patriotism-img
+		content: url("/images/patriotism_dark.png")
 
 .error-pg
 	display: flex
@@ -71,12 +82,43 @@ html[theme="dark"]
 	flex-direction: column
 	margin: 5rem
 	img
-		width: 18rem
+		width: 15rem
 		animation: 35s gradient infinite
 	h2
-		margin-block: .25rem 0
+		@include title
+		margin: 0
 		font-size: 2.5rem
 		font-weight: bold
 	p 
+		margin: 0
 		color: $text-secondary-color
 		text-align: center
+
+.preview
+	margin: 0
+	p, h1, h2, h3, h4
+		margin: 0
+
+.md
+	a
+		color: $text-color
+		vertical-align: baseline
+		&::after
+			content: " \2197"
+			font-family: "Inter"
+			font-size: 1.25rem
+		&:lang(ar):after
+			content: " \2196"
+		&:hover
+			color: $text-secondary-color
+	p
+		text-align: justify
+		text-indent: 2rem
+	blockquote
+		color: $text-secondary-color
+		margin-inline-start: 1rem
+		border-inline-start: 5px solid $container-color
+	h1, h2, h3
+		@include title
+		padding-block-end: .5rem
+		border-bottom: 1px solid $container-color

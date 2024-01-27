@@ -1,164 +1,116 @@
 <script lang="ts">
-    import { page } from '$app/stores'
-    import PostMenu from '$lib/components/PostMenu.svelte'
-    import { DateTime } from "$lib/luxon.min"
-    import { refreshToast } from '$lib/toastStyles.js'
-    import { i, language } from "@inlang/sdk-js"
-    import toast from 'svelte-french-toast'
-    import { fly } from 'svelte/transition'
+    import * as m from "$lang/messages"
+	import { likePayload, postPayload } from '$lib'
+    import Post from "$lib/components/Post.svelte"
 
     export let data
-    let {posts, session, supabase } = data
+    let isLoaded = false    
+    let {  posts, session }: any = data
+    $: ({ supabase, session } = data)
+    posts.then((data: Array<any>) => {
+        posts = data
+        isLoaded = true
+    })
 
-    $: numPosts = posts.length
-    $: userPosts =  posts
-
-    const postListener = supabase.channel('posts')
-    .on(
-        'postgres_changes',
-        { event: '*', schema: 'public', table: 'posts' },
-        (payload) => {
-        if (payload.eventType === "INSERT") {
-            if ($page.url.pathname !== "/app/create") {
-                toast(i("app.refresh"), refreshToast)
+    $: if ($postPayload && isLoaded) {
+        if ($postPayload.eventType === "DELETE") {
+            if (posts.find((p : any) => p.id === ($postPayload.old).id) && posts.find((p : any) => p.id === ($postPayload.old).id).author === session?.user.id ) {
+                posts.splice(posts.indexOf(posts.find((p : any) => p.id === ($postPayload.old).id)),1)
             }
-        } else {
-            posts.pop(payload.old)
-            userPosts = [...posts]
+            posts = posts
         }
-        numPosts = userPosts.length
-    }).subscribe()
+        postPayload.set(null)
+    }
+
+    $: if ($likePayload && isLoaded) {
+        if ($likePayload.eventType === "INSERT") {
+            const getLikedPost: any = posts.find((p : any) => p.id === ($likePayload.new).liked_id)
+            posts.forEach((p: any) => {if (p.id === getLikedPost.id) {getLikedPost.likes.push($likePayload.new)}})
+        } else {
+            posts.forEach((p:any) => {
+                const getRemovedLike: any = p.likes.find((l : any) => l.id === ($likePayload.old).id)
+                if (getRemovedLike) {
+                    p.likes.splice(p.likes.indexOf(getRemovedLike),1)
+                }
+            })
+        }
+        posts = posts
+        likePayload.set(null)
+    }
 </script>
 
 <svelte:head>
-    <title>{i("titles.discover")} | Msharfin</title>
+    <title>{m.app_title_discover()} | Msharfin</title>
 </svelte:head>
 
-<section>
-    <h1>{i("titles.discover")}</h1>
+<section class="app-page">
+    <h1>{m.app_title_discover()}</h1>
 
-{#if numPosts !== 0}
-        {#each userPosts as post}
-            <button transition:fly={{ y: 100, duration: 200 }} class="post">  
-                    <button on:click={()=> /* goto(`/app/profile/${post.author_data.slug}`) */ alert("Coming soon..")} class="user-profile">
-                        {#if !post.author_data.avatar_url}
-                            <img src="" alt="{post.author_data.name}'s avatar.">
-                        {:else}
-                            <img src={post.author_data.avatar_url} alt="{post.author_data.name}'s avatar.">
-                        {/if}               
-                        <div class="user-info">
-                            <h4>{post.author_data.name}</h4>
-                            <h5>@{post.author_data.slug}</h5>                           
-                        </div>
-                    </button>
-                <p>{post.content}</p>
-                <h5 class="date">{i("app.post-date.0")} {DateTime.fromISO(post.post_date).setLocale(language).toRelativeCalendar()} {i("app.post-date.1")} {DateTime.fromISO(post.post_date).toLocaleString(DateTime.TIME_SIMPLE)}</h5>
-                <div class="interactions"><PostMenu {post} user={session?.user} /></div>
-            </button>
-        {/each}
-{:else}
-    <div class="error-pg">
-        <img src="/images/error.png" alt="">
-        <h2>So empty...</h2>
-        <p>There are no posts at the moment</p>
-    </div>
-{/if}
+{#await posts}
+    <div class="loading">
+        <div class="placeholder">
+            <div class="children user-info"></div>
+            <div class="children content"></div>
+        </div>
+        <div class="placeholder">
+            <div class="children user-info"></div>
+            <div class="children content"></div>
+            <div class="children content-1"></div>
+        </div>
+        <div class="placeholder">
+            <div class="children user-info"></div>
+            <div class="children content-1"></div>
+        </div>        
+    </div> 
+{:then userPosts}
+    {#each userPosts as post (post)}
+        <Post {post} {session} />
+    {:else}
+        <div class="error-pg">
+            <img src="/images/error.png" alt="">
+            <h2>So empty...</h2>
+            <p>There are no posts at the moment</p>
+        </div>
+    {/each}
+{/await}
 </section>
 
 
 <style lang="sass">
+@keyframes loading
+    0%
+        filter: unset
+    50%
+        filter: brightness(0.95)
+    100%
+        filter: unset
 
 section
-    display: flex
-    flex-direction: column
-    flex: 1
-    margin-inline: 1rem
-    margin-block-start: 1.5rem
+    @include page
+    .loading
+        .placeholder
+            padding-block-start: .5rem
+            .children
+                animation: loading 3s infinite
+                background-color: $container-color
+                border-radius: 12px        
+            .user-info
+                width: 5rem
+                height: 2rem
+                margin-block-end: 1rem
+            .content
+                width: 100%
+                height: 5rem
+            .content-1
+                width: 75%
+                margin-block-start: 1rem
+                height: 4rem                
+            &:not(:last-child)
+                padding-block-end: .5rem
+                border-bottom: 1px solid $container-color
     h1
         font-size: 3rem
+        @include title
         font-weight: bolder
         margin-block: .5rem
-    button
-        background: none
-        border: none
-    .post
-        cursor: default
-        &:not(:last-child)
-            border-bottom: solid $container-color 1px
-            margin-block-end: 1rem
-        .user-profile
-            display: flex
-            align-items: center
-            padding-block: .25rem
-            border-radius:24px
-            img
-                border-radius: 50%
-                width: 2.25rem
-                height: 2.25rem
-            .user-info
-                margin-inline-start: .5rem
-                h4, h5
-                    text-align: start
-                    font-size: .9rem
-                    margin: 0
-                h5
-                    color: $text-secondary-color
-                    margin-block-start: .1rem
-            &:hover
-                background-color: $container-color
-        .date
-            text-align: start
-            font-weight: 500
-            color: $text-secondary-color
-            font-size: 0.9rem
-            margin: 0 0 .5rem 0
-            padding-inline-start: .25rem
-        p
-            padding-inline-start: .25rem
-            text-align: start
-            user-select: text
-            font-size: 1.2rem
-        .interactions
-            display: flex
-            margin-block-end: .75rem
-            height: 50px
-            list-style-type: none
-            align-items: center
-            justify-content: space-between
-            li
-                display: flex
-                align-items: center
-                color: $text-secondary-color
-                button
-                    align-items: center
-                    display: flex
-                    font-size: 1.25rem
-                    background: none
-                    border: none
-                    margin-inline-end: .25rem
-                    border-radius: 50%
-                    padding: .25rem
-                    &:hover
-                        background-color: $container-color
-                .more
-                    border-radius: 12px
-                    padding: 0.5rem 1rem
-                    color: $text-secondary-color
-                    p
-                        margin-block: 0
-                .danger
-                    .ico, p
-                        color: red
-                    &:hover
-                        background-color: hsla(0, 100% , 75%, 0.25)   
-                a, p
-                    font-size: 1rem
-                    margin-inline-start: .25rem
-                    color: $text-secondary-color
-                    text-decoration: none
-            div
-                display: flex
-                align-items: center
-                button
-                    margin-inline-start: 1rem
 </style>
