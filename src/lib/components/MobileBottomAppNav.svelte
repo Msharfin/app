@@ -1,143 +1,239 @@
 <script lang="ts">
-  import Icon from "@iconify/svelte"
-  import * as m from "$lang/messages"
-  import { page } from "$app/stores"
-  import { goto, invalidateAll } from "$app/navigation"
-	import { fly } from "svelte/transition"
-	import { signOut } from "$lib"
+	import Icon from "@iconify/svelte"
+	import * as m from "$lang/messages"
+	import { page } from "$app/stores"
+	import { goto, invalidateAll } from "$app/navigation"
+	import { fade, fly } from "svelte/transition"
 
-  export let profile: any  
-  let expanded = false
-
+	export let profile: any
+	let expanded = false
 </script>
 
+{#if expanded}
+	<div transition:fade={{ duration: 200 }} class="more-opt">
+		<h1>Menu</h1>
+		<div class="column-container">
+			<div class="column">
+				<button
+					on:click={() => {
+						expanded = false
+						goto("/app")
+					}}
+					><span class="ico"
+						><Icon icon="solar:home-2-bold-duotone" /></span
+					>
+					<p>Discover</p></button
+				>
+				<button
+					on:click={() => {
+						expanded = false
+						goto("/app/search")
+					}}
+					><span class="ico"
+						><Icon icon="solar:magnifer-bold-duotone" /></span
+					>
+					<p>Search</p></button
+				>
+				<button
+					on:click={() => {
+						expanded = false
+						goto("/app/profile/me")
+					}}
+					><span class="ico"
+						><img
+							class="pfp"
+							src={profile.avatar_url
+								? profile.avatar_url
+								: "/images/no_pfp.png"}
+							alt="Your avatar"
+						/></span
+					>
+					<p>Profile</p></button
+				>
+			</div>
+			<div class="column">
+				<button
+					on:click={() => {
+						expanded = false
+						goto("/app/settings")
+					}}
+					><span class="ico"
+						><Icon icon="solar:settings-bold-duotone" /></span
+					>
+					<p>Settings</p></button
+				>
+				<button
+					class="create"
+					on:click={() => {
+						expanded = false
+						goto("/app/post/create")
+					}}
+					><span class="ico"
+						><img
+							src="/images/create.png"
+							alt={m.app_title_create()}
+						/></span
+					>
+					<p>Create</p></button
+				>
+				<button
+					on:click={() => {
+						expanded = false
+						alert("coming soon...")
+					}}
+					><span class="ico"
+						><Icon icon="solar:bell-bold-duotone" /></span
+					>
+					<p>Notifications</p></button
+				>
+			</div>
+		</div>
+	</div>
+{/if}
 
-<footer in:fly={{ y: 200, duration: 500}}  class:expanded class="mobile">
-  <button on:click={() => expanded === true ? expanded = false : expanded = true} class="expand"> <span class="ico">
-    {#if !expanded}
-      <Icon icon="solar:alt-arrow-up-linear" />
-    {:else}
-      <Icon icon="solar:alt-arrow-down-linear" />    
-    {/if}
-  </span>
-  </button>
-  <div class="main-btns">
-    <!-- Create -->
-    {#if $page.url.pathname === "/app/post/create"}
-      <button class="current" disabled ><span class="ico"><Icon icon="solar:add-circle-bold-duotone" /></span></button>
-    {:else}
-      <button on:click={() => goto("/app/post/create")} ><span class="ico"><Icon icon="solar:add-circle-bold-duotone" /></span></button>
-    {/if}  
-    <!-- Me -->
-    
-    {#if $page.url.pathname === "/app/profile/me"}
-      <button class="current" disabled ><img src={profile.avatar_url ? profile.avatar_url: "/images/no_pfp.png" } alt="Your avatar"></button>
-    {:else}
-      <button on:focus={() => goto("/app/profile/me")} ><img src={profile.avatar_url ? profile.avatar_url: "/images/no_pfp.png" } alt="Your avatar"></button>
-    {/if}   
-  </div>
-    {#if expanded}
-      <div out:fly={{ y:200, duration: 1000}} class="more-opt">
-        <button on:click={() => {
-          expanded = false
-          $page.url.pathname.endsWith("/app" || "/app")? invalidateAll() :goto("/app")}}><span class="ico"><Icon icon="solar:home-2-bold-duotone" /></span> <p>Discover</p></button>
-        <!-- <button on:click={() => alert("Coming Soon...")}><span class="ico"><Icon icon="solar:users-group-rounded-bold-duotone" /></span> <p>Friends</p></button> -->
-        <button on:click={() => {expanded = false 
-          goto("/app/search")}}><span class="ico"><Icon icon="solar:magnifer-bold-duotone" /></span> <p>Search</p></button>
-        <button on:click={() => {expanded = false 
-          goto("/app/settings")}}><span class="ico"><Icon icon="solar:settings-bold-duotone" /></span> <p>Settings</p></button>
-        <button on:click={() => 
-        {expanded = false
-        signOut()}}><span class="ico"><Icon icon="solar:logout-2-bold-duotone" /></span> <p>Sign out</p></button>
-      </div>
-    {/if}
+<footer in:fly={{ y: 200, duration: 500 }} class="mobile" class:expanded>
+	<div class="main-btns">
+		<button on:click={() => (expanded = !expanded)} class="expand">
+			{#if expanded}
+				<span in:fly={{ y: 50, duration: 300 }} class="ico"
+					><Icon icon="iconoir:cancel" /></span
+				>
+			{:else}
+				<span in:fly={{ y: 50, duration: 300 }} class="ico"
+					><Icon icon="heroicons-solid:view-grid" /></span
+				>
+			{/if}
+		</button>
+		<div class="left">
+			{#if !expanded}
+				<button
+				on:click={() => {
+					expanded = false
+					goto("/app/post/create")
+				}}
+				class="create"
+				><img
+						src="/images/create.png"
+						alt={m.app_title_create()}
+					/>
+				</button
+				>
+				<button on:click={() => alert("coming soon...")}
+					><span class="ico"><Icon icon="solar:bell-bold" /></span
+					></button
+				>
+				<button
+					on:focus={() => {
+						expanded = !expanded
+						goto("/app/profile/me")
+					}}
+					><img
+						src={profile.avatar_url
+							? profile.avatar_url
+							: "/images/no_pfp.png"}
+						alt="Your avatar"
+					/></button
+				>
+			{/if}
+		</div>
+	</div>
 </footer>
 
 <style lang="sass">
 
 .mobile 
-  z-index: 50
-  position: sticky
-  background-color: $text-color
-  bottom: 0px
-  left: 0px
-  border-top-right-radius: 24px
-  border-top-left-radius: 24px
-  height: 6.5rem
-  display: flex
-  align-items: center
-  flex-direction: column
-  padding-inline: 1.75rem
-  user-select: none
-  transition: height .75s ease
-  .expand
-    margin-block-start: .25rem
-    border-radius: 50%
-    color: $nav-bar-button-hover
-    font-size: 1.25rem
-    display: flex
-    justify-content: center
-    align-items: center
-    height: 1.45rem
-    width: 1.45rem
-    &:hover
-      background-color: $nav-bar-button
-    span
-      padding: .125rem
-  .main-btns
-    display: flex
-    width: 100%
-    align-items: center
-    padding-block: .5rem
-    height: 4.25rem
-    justify-content: space-between
-    .ico
-      color: red
-      animation: gradient 35s infinite
-    button
-      border-radius: 50%
-      font-size: 3rem
-      display: flex
-      align-items: center
-      justify-content: center
-      padding: .5rem
-      width: 3.5rem
-      height: 3.5rem      
-      img
-        width: 2.75rem
-        height: 2.75rem 
-        border-radius: 50%
-      &:hover
-        background-color: $nav-bar-button
-    .current
-      pointer-events: none
-      cursor: default
-      position: relative
-      background-color: $nav-bar-button
+	z-index: 6
+	position: sticky
+	bottom: 0px
+	left: 0px
+	height: 100%
+	display: flex
+	align-items: center
+	flex-direction: column
+	padding: .5rem 1rem
+	backdrop-filter: blur(15px)
+	background-color: hsl(from $white-0 h s l / 50%)    
+	user-select: none
+	.main-btns
+		display: flex
+		width: 100%
+		align-items: center
+		height: 4rem
+		justify-content: space-between
+		font-size: 3rem 
+		.ico
+			color: $blue-0
+		button
+			border-radius: 50%
+			font-size: 3rem
+			display: flex
+			align-items: center
+			justify-content: center
+			padding: .5rem
+			width: 3.5rem
+			height: 3.5rem
+			&:hover
+				background-color: $gray-0
+		img
+			width: 3rem
+			height: 3rem 
+			&[alt="Your avatar"]
+				border-radius: 50%
 
-  .more-opt
-    display: flex
-    flex-wrap: wrap
-    margin-block-start: 1.5rem
-    align-items: center
-    justify-content: center
-    width: 100%
-    button
-      width: 48%
-      color: $container-color
-      background-color: $nav-bar-button
-      text-align: start
-      font-size: 1.5rem
-      padding: .5rem 
-      margin-block-end: .25rem
-      margin-inline-end: .25rem
-      p
-        margin-block: 0.25rem
-        font-weight: 300
-        color: $button-text-color
-      &:hover
-        background-color: $nav-bar-button-hover
+		.left
+			display: flex
   
 .expanded
-  height: 20rem
+	backdrop-filter: none
+	border-color: transparent
+	background: transparent
+
+.more-opt
+	z-index: 5
+	position: fixed
+	left: 0px
+	bottom: 0
+	height: 100vh
+	width: 100%
+	padding: 7rem 1.5rem 7rem
+	background: linear-gradient(180deg, $white-0 25%, hsl(from $white-0 h s l / 25% ) 100%)
+	backdrop-filter: blur(15px)
+	h1
+		font-size: 3rem
+		font-weight: bolder
+		margin-block: .5rem
+		@include title
+	.column-container
+		display: flex
+		justify-content: space-around
+		.column
+			width: 100%
+			display: flex
+			flex-direction: column    
+			&:first-child
+				margin-right: .5rem
+		button
+			height: 6rem
+			color: $black-0
+			text-align: start
+			font-size: 1.625rem
+			padding: .5rem
+			border: 1px solid $gray-0 
+			background-color: $white-0
+			margin-block-end: .45rem
+			span
+				color: $blue-0
+			p
+				margin-block: 0.25rem
+				font-weight: 300
+			&:hover
+				background-color: $white-1        
+		img
+			width: 1.75rem
+		.pfp
+			border-radius: 50%
+		.create
+			@include mainBtn
+			&
+				border-color: $blue-m1
 </style>

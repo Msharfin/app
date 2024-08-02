@@ -2,7 +2,7 @@ import type { PageServerLoad } from "./$types"
 
 export const load = (async ({locals:{supabase}}) => {
   return { posts: new Promise(async (fulfil) => {
-    const { data }: any = await supabase.from("posts").select("*")
+    const { data }: any = await supabase.from("posts").select("*").eq("isHidden", false)
 
     for (let i = 0; i < data?.length; i++) {
       const { data: profile }: any = await supabase

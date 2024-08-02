@@ -1,31 +1,37 @@
-
-<script>
-	import Icon from "@iconify/svelte"
-	import * as m from "$lang/messages"
+<script lang="ts">
+  import Icon from "@iconify/svelte"
+  import * as m from "$lang/messages"
 </script>
 
 <div class="loading">
-	<img src="/images/logo.png" class="logo" alt={m.alt_logo({ brand: m.main_features_title_1 })}>
-	<Icon icon="eos-icons:loading" class="loading-ico" />
-</div>	
+  <div>
+    <img
+      src="/images/logo.png"
+      class="logo"
+      alt={m.alt_logo({ brand: m.main_features_title_1 })}
+    />
+  </div>
+  <img class="logo-word" src="/images/msharfin.png" alt={m.alt_logo({ brand: m.main_features_title_1 })} />
+</div>
 
 <style lang="sass">
 
 .loading
 	position: fixed
-	height: 100vh
+	height: 100svh
 	width: 100vw
-	display: flex
-	background-color: hsla($background-color, 0.5)
 	z-index: 999
-	backdrop-filter: blur(50px)
+	display: flex
 	flex-direction: column
 	justify-content: center
 	align-items: center
 	img
 		width: 5rem
-		margin-bottom: 2rem
-	:global(.loading-ico)
-		color: $text-color
-		font-size: 2rem
+	div
+		display: flex
+		justify-content: center
+		align-items: center
+		flex:1
+	.logo-word
+		margin-block-end: 1rem
 </style>

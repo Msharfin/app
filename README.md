@@ -1,4 +1,4 @@
-# Msharfin | _BETA_
+# Msharfin | *BETA*
 
 This simple `readME` has the necessary steps to get you started
 

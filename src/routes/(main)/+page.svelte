@@ -1,65 +1,85 @@
 <script>
-  	import Icon from "@iconify/svelte"
-  	import * as m from "$lang/messages"
-	import { languageTag } from "$lang/runtime"
-
+	import Icon from "@iconify/svelte";
+	import * as m from "$lang/messages";
+	import { languageTag } from "$lang/runtime";
 </script>
 
 <svelte:head>
-  <title>Msharfin | {m.title_main()}.</title>
+	<title>Msharfin | {m.title_main()}.</title>
 </svelte:head>
 
 <div class="wrapper">
-  <section class="welcome">
-    <div>
-      <h1>
-        <span>{m.main_moto_0()}</span>
-        {m.main_moto_1()} <br /><span class="title-ico"
-          ><Icon icon="solar:lock-keyhole-bold-duotone" /></span
-        >
-        {m.main_moto_2()}<span>.</span>
-      </h1>
-	  <img src="/images/patriotism.png" class="patriotism-img" alt="Made In Morocco" />
-    </div>
-    <img src="/images/welcome.png" class="welcome-img" alt="{m.image_selfie_alt()}." />
-  </section>
-  <section class="features">
-    <div class="title-wrap">
-      <h2>
-        {m.main_features_title_0()} <mark>{m.main_features_title_1()}</mark>{ "ar" === new String(languageTag())  ? "؟": "?"}
-      </h2>
-    </div>
-    <div
-      class="content-wrap
+	<section class="welcome">
+		<div>
+			<h1>
+				<span>{m.main_moto_0()}</span>
+				{m.main_moto_1()} <br /><span class="title-ico"
+					><Icon icon="solar:lock-keyhole-bold-duotone" /></span
+				>
+				{m.main_moto_2()}<span>.</span>
+			</h1>
+			<img
+				src="/images/patriotism.png"
+				class="patriotism-img"
+				alt="Made In Morocco"
+			/>
+		</div>
+		<img
+			src="/images/welcome.png"
+			class="welcome-img"
+			alt="{m.image_selfie_alt()}."
+		/>
+	</section>
+	<section class="features">
+		<div class="title-wrap">
+			<h2>
+				{m.main_features_title_0()}
+				<mark>{m.main_features_title_1()}</mark>{"ar" ===
+				new String(languageTag())
+					? "؟"
+					: "?"}
+			</h2>
+		</div>
+		<div
+			class="content-wrap
 		"
-    >
-      <div class="img-wrap">
-        <img src="/images/sitting-reading.png" class="features-img" alt="{m.main_features_0_detail()}." />
-      </div>
-      <div class="container-wrap">
-        <div>
-          <h2>
-            <span class="ico"><Icon icon="solar:shield-keyhole-bold-duotone" /></span>
-            {m.main_features_0_title()}
-          </h2>
-          <p>{m.main_features_0_detail()}</p>
-        </div>
-        <div>
-          <h2>
-            <span class="ico"><Icon icon="solar:shield-bold-duotone" /></span>
-            {m.main_features_1_title()}
-          </h2>
-          <p>{m.main_features_1_detail()}</p>
-        </div>
-      </div>
-    </div>
-  </section>
+		>
+			<div class="img-wrap">
+				<img
+					src="/images/sitting-reading.png"
+					class="features-img"
+					alt="{m.main_features_0_detail()}."
+				/>
+			</div>
+			<div class="container-wrap">
+				<div>
+					<h2>
+						<span class="ico"
+							><Icon
+								icon="solar:shield-keyhole-bold-duotone"
+							/></span
+						>
+						{m.main_features_0_title()}
+					</h2>
+					<p>{m.main_features_0_detail()}</p>
+				</div>
+				<div>
+					<h2>
+						<span class="ico"
+							><Icon icon="solar:shield-bold-duotone" /></span
+						>
+						{m.main_features_1_title()}
+					</h2>
+					<p>{m.main_features_1_detail()}</p>
+				</div>
+			</div>
+		</div>
+	</section>
 </div>
 
 <style lang="sass">
 .ico
-	color: red
-	animation: gradient 35s infinite
+	color: $blue-0
 
 .wrapper
 	position: relative
@@ -81,19 +101,19 @@
 		flex-direction: column
 		h1
 			@include title
-			font-size: 4rem
-			margin-block: 0 .5rem
-			line-height: 1.05
+			&
+				font-size: 4rem
+				margin-block: 0 .5rem
+				line-height: 0.9
 		.patriotism-img
 			width: 13rem
 	.welcome-img
 		width: 20rem
-		animation: gradient 35s infinite
 
 	span, span *
 		@include title
-		color: red
-		animation: gradient 35s infinite
+		&
+			color: $blue-0
 
 .features
 	padding: 0 10rem 3rem
@@ -103,12 +123,11 @@
 	text-align: center
 	.title-wrap 
 		font-size: 1.5rem
+		h2, *
+			@include title
 		mark
-			font-family: "PlayFair Display"
-			background-color: hsla(0, 100%, 50%, 0.125)
-			color: red
-			animation: gradient 35s infinite	
-
+			background-color: hsl(from $blue-0 h s l / 25%)
+			color: $blue-0
 
 .content-wrap
 	display: flex
@@ -116,7 +135,7 @@
 	margin-top: .5rem
 	margin-inline-start: 5rem
 	div
-		background-color: $container-color
+		background-color: $white-1
 		padding: 2rem 2rem 
 		border-radius: 14px
 		text-align: justify
@@ -135,13 +154,12 @@
 			border-radius: 8px
 			padding: .5rem
 			font-size: 1.75rem
-			background-color: red
-			animation: gradient 35s infinite
+			background-color: $blue-0
 
 	p
 		margin: 0
 		font-weight: 400
-		color: $text-secondary-color
+		color: $gray-2
 		font-size: 1.05rem
 		&:lang(ar)
 			font-weight: 500
@@ -153,7 +171,6 @@
 		width: 18rem
 		margin-inline: 2rem
 		transform: scaleX(-1) scale(1.5)
-		animation: gradient 35s infinite
 		&:lang(ar)
 			// This will remove the scaleX property while keeping the scale property
 			transform: scale(1.5)

@@ -1,26 +1,25 @@
 <script lang="ts">
-
-    export let data
-    let { session, userProfile } = data
+  export let data
+  let { session, userProfile } = data
 </script>
 
 <svelte:head>
-    <title>Profile de  | Msharfin</title>
+  <title>Profile de | Msharfin</title>
 </svelte:head>
 
 <section>
-    <div class="profile-info">
-        <div class="avatar">
-        {#if userProfile?.avatar_url}
-            <img src="{userProfile?.avatar_url}" alt="">
-        {:else}
-            <img src="/images/no_pfp.png" alt="">
-        {/if}
-        </div>
-
-        <h2>{userProfile?.name}</h2>
-        <h5>@{userProfile?.slug}</h5>
+  <div class="profile-info">
+    <div class="avatar">
+      {#if userProfile?.avatar_url}
+        <img src={userProfile?.avatar_url} alt="" />
+      {:else}
+        <img src="/images/no_pfp.png" alt="" />
+      {/if}
     </div>
+
+    <h2>{userProfile?.name}</h2>
+    <h5>@{userProfile?.slug}</h5>
+  </div>
 </section>
 
 <style lang="sass">
@@ -40,7 +39,7 @@ section
         .avatar
             padding: .5rem
             border-radius: 50%
-            border: 5px solid $text-color
+            border: 5px solid $black-0
             display: flex
             justify-content: center
             align-items: center
@@ -55,20 +54,20 @@ section
             text-align:  center
         h5
             font-size: 1rem
-            color: $text-secondary-color
+            color: $gray-2
     button
-        color: $text-color
+        color: $black-0
         display: flex
         justify-content: center
         align-items: center
         width: 100%
         border: none
-        background: $container-color
+        background: $white-1
         font-size: 1.25rem
         font-weight: bold
         border-radius: 24px
         &:hover
-            background-color: $hover-container-color
+            background-color: $gray-0
         p 
             margin-inline-start: .5rem
 </style>

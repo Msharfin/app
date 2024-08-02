@@ -8,19 +8,22 @@ html:lang(ar)
 emoji-picker
 	--emoji-font-family: "Noto Color Emoji"
 	--input-border-size: 0px
-	--border-color: none
-	--indicator-color: var(--nav-bar-button)
+	--border-color: $gray-3
+	--indicator-color: var(--blue-0)
 	height: 15rem
 	width: 100%
 
 
 html
-	color: $text-color
-	background-color: $background-color
+	color: $black-0
+	background-color: $white-0
 	*:lang(ar)
 		font-family: "TajInAr", "Inter", "Noto Color Emoji"
 	*
 		font-family: "Inter", "Noto Color Emoji"
+
+p
+	margin: 0
 
 body
 	position: relative
@@ -31,7 +34,7 @@ body
 
 @media screen and (min-width: 790px)
 	.app-page
-		padding: 4rem 12rem
+		padding: 4rem 20rem 4rem 20rem
 		margin: 0
 
 img
@@ -39,13 +42,13 @@ img
 
 a
 	vertical-align: middle
-	text-decoration: underline
+	text-decoration: none
 	transition: all .5s ease
 
 .link
 	vertical-align: baseline
 	&::after
-		font-family: "Inter"
+		font-family: "Inter", sans-serif !important
 		content: " \2197"
 		font-size: 1.25rem
 	&:lang(ar):after
@@ -74,6 +77,8 @@ html[theme="dark"]
 		content: url("/images/error_dark.png")
 	.patriotism-img
 		content: url("/images/patriotism_dark.png")
+	.logo-word
+		content: url("/images/msharfin-dark.png")
 
 .error-pg
 	display: flex
@@ -84,14 +89,14 @@ html[theme="dark"]
 	img
 		width: 15rem
 		animation: 35s gradient infinite
-	h2
-		@include title
+	h2			
 		margin: 0
 		font-size: 2.5rem
 		font-weight: bold
+		@include title
 	p 
 		margin: 0
-		color: $text-secondary-color
+		color: $gray-2
 		text-align: center
 
 .preview
@@ -99,9 +104,12 @@ html[theme="dark"]
 	p, h1, h2, h3, h4
 		margin: 0
 
+::placeholder
+	color: $gray-3
+
 .md
 	a
-		color: $text-color
+		color: $black-0
 		vertical-align: baseline
 		&::after
 			content: " \2197"
@@ -110,15 +118,15 @@ html[theme="dark"]
 		&:lang(ar):after
 			content: " \2196"
 		&:hover
-			color: $text-secondary-color
+			color: $gray-2
 	p
 		text-align: justify
 		text-indent: 2rem
 	blockquote
-		color: $text-secondary-color
+		color: $gray-2
 		margin-inline-start: 1rem
-		border-inline-start: 5px solid $container-color
+		border-inline-start: 5px solid $white-1
 	h1, h2, h3
-		@include title
 		padding-block-end: .5rem
-		border-bottom: 1px solid $container-color
+		border-bottom: 1px solid $white-1		
+		@include title

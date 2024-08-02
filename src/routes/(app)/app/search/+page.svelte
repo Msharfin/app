@@ -1,76 +1,104 @@
 <script lang="ts">
-	import { enhance } from "$app/forms"
-	import Post from "$lib/components/Post.svelte"
-	import Icon from "@iconify/svelte"
-	import * as m from "$lang/messages"
+  import { enhance } from "$app/forms"
+  import Post from "$lib/components/Post.svelte"
+  import Icon from "@iconify/svelte"
+  import * as m from "$lang/messages"
 
+  export let form: any
+  export let data
+  let { session, supabase } = data
 
-    export let form: any
-    export let data
-    let { session, supabase } = data
-
-    const postListener = supabase.channel('posts')
+  const postListener = supabase
+    .channel("posts")
     .on(
-        'postgres_changes',
-        { event: '*', schema: 'public', table: 'posts' },
-        (payload: any) => {
+      "postgres_changes",
+      { event: "*", schema: "public", table: "posts" },
+      (payload: any) => {
         if (payload.eventType === "DELETE") {
-            if (form.searchData.find((p : any) => p.id === (payload.old).id) && form.searchData.find((p : any) => p.id === (payload.old).id).author === session?.user.id ) {
-                form.searchData.splice(form.searchData.indexOf(form.searchData.find((p : any) => p.id === (payload.old).id)),1)
-            }
-            form.searchData = form.searchData
+          if (
+            form.searchData.find((p: any) => p.id === payload.old.id) &&
+            form.searchData.find((p: any) => p.id === payload.old.id).author ===
+              session?.user.id
+          ) {
+            form.searchData.splice(
+              form.searchData.indexOf(
+                form.searchData.find((p: any) => p.id === payload.old.id)
+              ),
+              1
+            )
+          }
+          form.searchData = form.searchData
         }
-    }).subscribe()
+      }
+    )
+    .subscribe()
 
-    const likeListener = supabase.channel('likes')
+  const likeListener = supabase
+    .channel("likes")
     .on(
-        'postgres_changes',
-        { event: '*', schema: 'public', table: 'likes' },
-        (payload: any) => {
+      "postgres_changes",
+      { event: "*", schema: "public", table: "likes" },
+      (payload: any) => {
         if (form?.searchData) {
-            if (payload.eventType === "INSERT") {
-                const getLikedPost: any = form.searchData.find((p : any) => p.id === (payload.new).liked_id)
-                form.searchData.forEach((p: any) => {if (p.id === getLikedPost.id) {getLikedPost.likes.push(payload.new)}})
-            } else {
-                form.searchData.forEach((p:any) => {
-                    const getRemovedLike: any = p.likes.find((p : any) => p.id === (payload.old).id)
-                    if (getRemovedLike) {
-                        p.likes.splice(p.likes.indexOf(getRemovedLike),1)
-                    }
-                })
-            }
-            form.searchData = form.searchData            
+          if (payload.eventType === "INSERT") {
+            const getLikedPost: any = form.searchData.find(
+              (p: any) => p.id === payload.new.liked_id
+            )
+            form.searchData.forEach((p: any) => {
+              if (p.id === getLikedPost.id) {
+                getLikedPost.likes.push(payload.new)
+              }
+            })
+          } else {
+            form.searchData.forEach((p: any) => {
+              const getRemovedLike: any = p.likes.find(
+                (p: any) => p.id === payload.old.id
+              )
+              if (getRemovedLike) {
+                p.likes.splice(p.likes.indexOf(getRemovedLike), 1)
+              }
+            })
+          }
+          form.searchData = form.searchData
         }
-    }).subscribe()
+      }
+    )
+    .subscribe()
 </script>
 
 <svelte:head>
-    <title>Search | Msharfin</title>
+  <title>Search | Msharfin</title>
 </svelte:head>
 
 <section class="app-page">
-    <h1>Search</h1>
-    <form use:enhance={() => {
-        return ({ update }) => update({ reset: false });
-      }} method="post">
-        <input name="search" placeholder="Search here..." type="text">
-        <button><span class="ico"><Icon icon="solar:magnifer-line-duotone" /></span></button>
-    </form>
-    <div class="results">
-        {#if form?.searchData}
-        <div class="posts">
-            {#each form?.searchData as post}
-                <Post {post} {session} />
-            {:else}
-                <div class="error-pg">
-                    <img src="/images/error.png" alt="">
-                    <h2>So empty...</h2>
-                    <p>We found nothing :(</p>
-                </div>
-            {/each}
-        </div>
-        {/if}
-    </div>
+  <h1>Search</h1>
+  <form
+    use:enhance={() => {
+      return ({ update }) => update({ reset: false })
+    }}
+    method="post"
+  >
+    <input name="search" placeholder="Search here..." type="text" />
+    <button
+      ><span class="ico"><Icon icon="solar:magnifer-line-duotone" /></span
+      ></button
+    >
+  </form>
+  <div class="results">
+    {#if form?.searchData}
+      <div class="posts">
+        {#each form?.searchData as post}
+          <Post {post} {session} />
+        {:else}
+          <div class="error-pg">
+            <img src="/images/error.png" alt="" />
+            <h2>So empty...</h2>
+            <p>We found nothing :(</p>
+          </div>
+        {/each}
+      </div>
+    {/if}
+  </div>
 </section>
 
 <style lang="sass">
@@ -84,11 +112,11 @@ section
     form
         display: flex
         align-items: center
-        background-color: $container-color
+        background-color: $white-1
         border-radius: 24px
         input
             font-size: 1.25rem
-            color: $text-color
+            color: $black-0
             width: 100%
             border-start-start-radius: 24px
             border-end-start-radius: 24px
@@ -107,14 +135,14 @@ section
             align-items: center
             justify-content: center
             &:hover
-                background-color: $hover-container-color
+                background-color: $gray-0
     .post
         cursor: default
         width: 100%
         padding-block-start: 1rem
         border-radius: 0
         &:not(:last-child)
-            border-bottom: solid $container-color 1px
+            border-bottom: solid $white-1 1px
         .user-profile
             display: flex
             align-items: center
@@ -131,7 +159,7 @@ section
                     border-radius: 50%
                     bottom: 0
                     inset-inline-end: 0
-                    border: $background-color 2px solid 
+                    border: $white-0 2px solid 
                 img
                     border-radius: 50%
                     width: 2.125rem
@@ -144,7 +172,7 @@ section
                 .titles
                     font-size: 0.8rem
                     margin-inline-start: .5rem
-                    border: 1px $text-color solid
+                    border: 1px $black-0 solid
                     padding: .15rem .3rem
                     border-radius: 12px
                 h4, h5
@@ -152,14 +180,14 @@ section
                     font-size: .85rem
                     margin: 0
                 h5
-                    color: $text-secondary-color
+                    color: $gray-2
                     margin-block-start: .1rem
             &:hover
-                background-color: $container-color
+                background-color: $white-1
         .date
             text-align: start
             font-weight: 500
-            color: $text-secondary-color
+            color: $gray-2
             font-size: 0.75rem
             margin: 0 0 .5rem 0
             padding-inline-start: .25rem
@@ -175,7 +203,7 @@ section
                 bottom: 0
                 width: 100%
                 height: 6rem
-                background: linear-gradient(to top, $background-color 0%, transparent 150%)
+                background: linear-gradient(to top, $white-0 0%, transparent 150%)
                 font-size: 1rem
                 font-weight: bold
                 display: flex
@@ -195,8 +223,8 @@ section
             align-items: center
             justify-content: space-between
     .post:focus
-        background-color: $container-color
+        background-color: $white-1
         .post-container .read-more
-            background: linear-gradient(to top, $container-color 0%, transparent 100%)
+            background: linear-gradient(to top, $white-1 0%, transparent 100%)
 
 </style>

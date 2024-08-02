@@ -1,71 +1,106 @@
-<script>
-	import * as m from "$lang/messages"
-	import Language from "$lib/components/Language.svelte"
-	import Icon from "@iconify/svelte"
-	import { version } from "$lib"
-	import toast from "svelte-french-toast"
-	import { errorToast } from "$lib/toastStyles"
-	import { goto } from "$app/navigation"
-	import { browser } from "$app/environment"
-	import ThemeDropdown from "$lib/components/ThemeDropdown.svelte"
+<script lang="ts">
+  import * as m from "$lang/messages"
+  import Language from "$lib/components/Language.svelte"
+  import Icon from "@iconify/svelte"
+  import { version } from "$lib"
+  import toast from "svelte-french-toast"
+  import { errorToast } from "$lib/toastStyles"
+  import { goto } from "$app/navigation"
+  import { browser } from "$app/environment"
+  import ThemeDropdown from "$lib/components/ThemeDropdown.svelte"
+  import { createAccordion } from "@melt-ui/svelte"
 
-	const getTheme = browser && localStorage.getItem("theme")
-	export let data
+  const getTheme = browser && localStorage.getItem("theme")
+  export let data
 
-	let { supabase, session } = data
-	$: ({ supabase, session } = data)
+  let username: any
+  let { supabase, session, userProfile } = data
+  $: ({ supabase, session } = data)
 
-	async function signOut() {
-		const { error } = await supabase.auth.signOut()
-		if (error) {
-			toast.error(error.message, errorToast)
-		} else {
-			goto("/")
-		}
-	}
+  async function signOut() {
+    const { error } = await supabase.auth.signOut()
+    if (error) {
+      toast.error(error.message, errorToast)
+    } else {
+      goto("/")
+    }
+  }
+
+  const {
+    elements: { content, item, trigger, root },
+    helpers: { isSelected },
+  } = createAccordion({
+    defaultValue: "item-1",
+  })
 </script>
 
 <svelte:head>
-	<title>{m.app_title_settings()} | Msharfin</title>
+  <title>{m.app_title_settings()} | Msharfin</title>
 </svelte:head>
 
 <section class="app-page">
-	<h1>{m.app_title_settings()}</h1>
-    <button on:click={() => goto("/app/settings/appearance")}> <div class="title"><span class="ico"><Icon icon="solar:paint-roller-bold" /></span> <h3>{m.settings_look()}</h3></div> <span class="arrow ico"><Icon icon="solar:alt-arrow-right-linear" /></span></button>
-    <!-- <button> <div class="title"><span class="ico"><Icon icon="solar:user-circle-bold" /></span> <h3>{m.settings_acc()}</h3></div> <span class="arrow ico"><Icon icon="solar:alt-arrow-right-linear" /></span></button> -->
-    <button on:click={() => goto("/app/settings/other")}> <div class="title"><span class="ico"><Icon icon="solar:info-circle-bold" /></span> <h3>{m.settings_misc()}</h3></div> <span class="arrow ico"><Icon icon="solar:alt-arrow-right-linear" /></span></button>
-	<!-- <h3>
-		<span class="title-ico"><Icon icon="solar:paint-roller-bold" /></span>
-		{i("settings.appearance")}
-	</h3>
-	<div class="settings">
-		<li><span>{i("settings.theme")}</span><ThemeDropdown /></li>
-		<li><span>{i("footer.lang")}</span><Language /></li>
-	</div>
-	<h3>
-		<span class="title-ico"><Icon icon="solar:user-circle-bold" /></span>
-		{i("settings.account")}
-	</h3>
-	<div class="settings">
-		<h4>
-			{i("settings.acc-info")} <span class="email">{session?.user.email}</span>
-		</h4>
-	</div>
-	<h3>
-		<span class="title-ico"><Icon icon="solar:info-circle-bold" /></span>
-		{i("settings.misc")}
-	</h3>
-	<div class="settings">
-		<li><a href="/resources" class="link">{i("titles.res_portal")}</a></li>
-		<li>
-			<a
-				target="_blank"
-				rel="noopener noreferrer"
-				href="https://msharfin.statuspage.io/"
-				class="link">{i("footer.status")}</a
-			>
-		</li>
-	</div> -->
+  <h1>{m.app_title_settings()}</h1>
+  <div class="container">
+    <h2>
+      <span class="ico"><Icon icon="solar:pallete-2-bold-duotone" /></span><span
+        class="title">{m.settings_look()}</span
+      >
+    </h2>
+    <span class="desc">Customise the look and feel of the app</span>
+    <div class="options">
+      <!-- <li><span>{m.settings_lang()}</span> <Language /></li> -->
+      <li><span>{m.settings_theme()}</span> <ThemeDropdown /></li>
+    </div>
+  </div>
+  <div class="container">
+    <h2>
+      <span class="ico"><Icon icon="solar:user-circle-bold-duotone" /></span
+      ><span class="title">{m.settings_acc()}</span>
+    </h2>
+    <span class="desc">Account settings/preferences and profile</span>
+    <div class="options">
+      <li>
+        <span>Username</span> <span class="user-data">{userProfile.name}</span>
+      </li>
+      <li>
+        <span>Tag</span> <span class="user-data">{userProfile.slug}</span>
+      </li>
+      <li>
+        <span>E-mail address</span>
+        <span class="user-data">{session?.user.email}</span>
+      </li>
+    </div>
+    <div class="button-container">
+      <!-- <button on:click={() => goto("/app/settings/modify_account")}
+        ><span class="ico"
+          ><Icon icon="solar:ruler-cross-pen-bold-duotone" /></span
+        ><span>Modify</span></button
+      > -->
+      <button on:click={() => signOut()}
+        ><span class="ico"><Icon icon="solar:logout-2-bold-duotone" /></span
+        ><span>{m.auth_signout()}</span></button
+      >
+    </div>
+  </div>
+  <div class="container">
+    <h2>
+      <span class="ico"><Icon icon="solar:info-circle-bold-duotone" /></span
+      ><span class="title">{m.settings_misc()}</span>
+    </h2>
+    <span class="desc">Resources and info about the app</span>
+    <div class="options">
+      <li><span>Version</span> <span class="user-data">v{version}</span></li>
+      <li><a href="/resources" class="link">{m.res_portal_title()}</a></li>
+      <li>
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://msharfin.statuspage.io/"
+          class="link">{m.title_site_status()}</a
+        >
+      </li>
+    </div>
+  </div>
 </section>
 
 <style lang="sass">
@@ -77,87 +112,62 @@ section
         font-size: 3rem
         font-weight: bolder
         margin-block: .5rem
-    // h3 
-    //     color: $text-secondary-color
-    //     // border-bottom: solid 1px $text-secondary-color
-    // .settings
-    //     display: flex
-    //     margin-inline-start: 2rem
-    //     flex-direction: column
-    //     list-style-type: none
-    //     font-size: 1.1rem
-    //     span
-    //         font-family: "Inter", sans-serif 
-    //         &:lang(ar)
-    //             font-family: "Tajawal", sans-serif
-    //     li
-    //         margin-block: .25rem
-    //         display: flex
-    //         justify-content: space-between
-    //         align-items: center
-    //         a
-    //             color: $text-color
-    //             &:hover
-    //                 color: $hover-color
-    //     hr
-    //         width: 100%
-    //     h4
-    //         margin-block: .25rem .5rem
-    //         font-weight: normal
-    //         .email
-    //             border-radius: 24px
-    //             padding: .25rem .65rem
-    //             font-weight: 500
-    //             background-color: $container-color
-    //             .title-ico
-    //                 padding-inline: 0
-    //     button
-    //         align-self: center
-    //         justify-content: center
-    //         display: flex    
-    //         width: 100%
-    //         border: none
-    //         border-radius: 24px
-    //         padding-block: .75rem
-    //         font-size: 1.25rem
-    //         .ico
-    //             margin-inline-end: .25rem
-    //     .signout
-    //         margin-block-start: .5rem
-    //         background-color: $text-color
-    //         color: $background-color
-    //         font-weight: bold
-    button
-        display: flex
-        align-items: center
-        justify-content: flex-start
-        background-color: $container-color
-        border-radius: 20px
-        padding: .25rem 1.25rem
-        .arrow
-            margin-inline-start: auto
-            font-size: 1.25rem
-            color: $text-secondary-color
-        .title
+    .container
+        border: 1px solid $gray-0
+        border-radius: 12px
+        padding: 1rem
+        h2
+            font-weight: bold
+            margin-block: 0 .5rem
             display: flex
             align-items: center
-            color: $text-secondary-color
-            font-size: 1rem
             .ico
-                font-size: 1.5rem
+                color: $blue-0
                 margin-inline-end: .5rem
-        &:hover
-            background-color: $hover-container-color
+        .desc
+            color: $gray-2
+        .options
+            margin-block-start: .75rem
+            li
+                list-style-type: none
+                display: flex
+                align-items: center
+                justify-content: space-between
+                &:not(:last-child)
+                    margin-block-end: .5rem
+                .user-data
+                    font-weight: bold
+                    color: $gray-2
+                a
+                    color: $blue-0
+                    &:hover
+                        color: $gray-3
         &:not(:last-child)
             margin-block-end: .5rem
-    .version
-        margin-block-start: 3.5rem 
-        display: flex
-        justify-content: space-between
-        font-weight: bolder
-        color: $text-secondary-color
-        span
-            font-family: "Inter", sans-serif
-        &:lang(ar)
-            direction: ltr
+
+        .button-container
+            display: flex
+            justify-content: center
+            align-items: center
+            margin-block-start: 1rem
+            button
+                width: 100%
+                display: flex
+                align-items: center
+                justify-content: center
+                padding-block: .75rem
+                font-size: 1.2rem
+                .ico
+                    margin-inline-end: .25rem
+                &:first-child
+                    margin-inline-end: .5rem
+                    background-color: $white-1
+                    color: $gray-2
+                    &:hover
+                        background-color: $gray-0
+                &:last-child
+                    background-color: hsla(17, 100%, 50%, 0.2)
+                    color: hsl(17, 100%, 50%)
+                    &:hover
+                        background-color: hsla(17, 100%, 50%, 0.4)
 </style>

@@ -1,69 +1,69 @@
-@keyframes gradient
-    0%
-        filter: hue-rotate(0deg)
-    100%
-        filter: hue-rotate(360deg)
-
 
 @font-face 
     font-family: "TajInAr"
-    font-weight: 400
-    src: url(https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzSBC45I.woff2) format('woff2')
+    font-weight: 500
+    src: url(https://fonts.gstatic.com/s/notokufiarabic/v21/CSRk4ydQnPyaDxEXLFF6LZVLKrodrOYFFlKp.woff2) format('woff2')
     unicode-range: U+0600-06FF
 
 @font-face 
     font-family: "TajInAr"
     font-weight: 700
-    src: url(https://fonts.gstatic.com/s/tajawal/v9/Iurf6YBj_oCad4k1l4qkHrRpiYlJ.woff2) format('woff2')
+    src: url(https://fonts.gstatic.com/s/notokufiarabic/v21/CSRk4ydQnPyaDxEXLFF6LZVLKrodrOYFFlKp.woff2) format('woff2')
     unicode-range: U+0600-06FF
 
 :root
-    --text-color: hsl(0, 0%, 10%)
-    --text-secondary-color: hsl(200,10%,60%)
+    --black-0: hsl(0, 0%, 10%)
+    --black-1: hsl(216, 40%, 20%)
+    --black-2: hsl(216, 40%, 30%)
 
-    --background-color: hsl(0, 0%, 100%)
-    
-    --hover-color: hsl(200, 10%, 50%)
-    --hover-secondary-color: hsl(200, 0%, 80%)
+    --gray-3: hsl(216, 50%, 50%)
+    --gray-2: hsl(216, 40%,60%)
+    --gray-1: hsl(216, 40%, 80%)
+    --gray-0: hsl(216, 100%, 92%)
 
-    --hover-container-color: hsl(200, 10%, 80%)
-    --container-color: hsl(200, 10%, 95%)
+    --white-1: hsl(216, 100%, 98%)
+    --white-0: hsl(0, 0%, 100%)    
 
-    --nav-bar-button: hsl(200, 20%, 20%)
-    --nav-bar-button-hover: hsl(200, 20%, 30%)
+    --blue-1: hsl(216, 100%, 52%)
+    --blue-0: hsl(216, 100%, 42%)
+    --blue-0x: hsl(216, 100%, 42%)
+    --blue-m1: hsl(216, 100%, 32%)
+
 
 // theme_light mode
-$text-color: var(--text-color)
-$text-secondary-color: var(--text-secondary-color)
-
-$button-text-color: var(--background-color)
+$black-0: var(--black-0)
+$black-1: var(--black-1)
+$black-2: var(--black-2)
     
-$container-color: var(--container-color)
-$hover-container-color: var(--hover-container-color)
+$gray-0: var(--gray-0)
+$gray-1: var(--gray-1)
+$gray-2: var(--gray-2)
+$gray-3: var(--gray-3)
 
-$hover-color: var(--hover-color)
-$hover-secondary-color: var(--hover-secondary-color)
+$white-1: var(--white-1)
+$white-0: var(--white-0)
 
-$background-color: var(--background-color)
+$blue-1: var(--blue-1)
+$blue-0: var(--blue-0)
+$blue-0x: var(--blue-0x)
+$blue-m1: var(--blue-m1)
 
-$nav-bar-button: var(--nav-bar-button)
-$nav-bar-button-hover: var(--nav-bar-button-hover)
 
 // Dark mode
 html[theme="dark"]
-    --text-color: hsl(200, 20%, 90%)
-    --text-secondary-color: hsl(200, 20%, 70%)
+    --black-0: hsl(216, 20%, 90%)
+    --black-1: hsl(216, 20%, 80%)
+    --black-2: hsl(216, 20%, 60%)
 
-    --hover-color: hsl(200, 20%, 65%)
-    --secondary-hover-color: hsl(200, 20%, 100%)
+    --gray-0: hsl(216, 20%, 16%)
+    --gray-1: hsl(216, 20%, 100%)
+    --gray-2: hsl(216, 20%, 70%)
+    --gray-3: hsl(216, 20%, 65%)
 
-    --background-color: hsl(200, 20%, 10%)
+    --white-0: hsl(216, 20%, 10%)
+    --white-1: hsl(216, 20%, 20%)
 
-    --container-color: hsl(200, 20%, 20%)
-    --hover-container-color: hsl(200, 20%, 16%)
-
-    --nav-bar-button: hsl(200, 20%, 80%)
-    --nav-bar-button-hover: hsl(200, 20%, 60%)
+    --blue-0x: hsl(216, 20%, 70%)
 
 // - Mixins -   
 
@@ -75,22 +75,21 @@ html[theme="dark"]
     cursor: pointer
     transition: all .5s ease
 
-@mixin secondaryBtn($color: $text-secondary-color, $font-weight: bold, $hover-color: $container-color)
+@mixin secondaryBtn($color: $gray-2, $font-weight: bold, $gray-3: $white-1)
     font-weight: $font-weight
     color: $color
     &:hover
-        background-color: $hover-color
+        background-color: $gray-3
 
 @mixin mainBtn
     font-weight: bold
-    color: $background-color
-    background-color: $text-color
+    color: white
+    background-color: $blue-0
     &:hover
-        background-color: $nav-bar-button-hover
+        background-color: $blue-1
 
 @mixin title
-    font-family: "PlayFair Display", "Noto Color Emoji"
-    font-weight: bold
+    font-family: "Gabarito", "Noto Color Emoji"
     &:lang(ar)
         font-family: "TajInAr", "Inter", "Noto Color Emoji"
         font-weight: bold
@@ -99,7 +98,7 @@ html[theme="dark"]
     display: flex
     flex-direction: column
     flex: 1
-    margin-block-start: .5rem
+    margin-block-start: 0rem
     margin-inline: 1rem
 
     

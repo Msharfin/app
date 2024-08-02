@@ -3,7 +3,7 @@
 	import "../app.sass"
 	import { invalidate } from "$app/navigation"
 	import { onMount } from "svelte"
-	import { setSupaClient } from "$lib"
+	import { setSupaClient } from "$lib/supabaseSessionManage"
 	import { browser } from "$app/environment"
 	import Loading from "$lib/components/Loading.svelte"
 	import {
@@ -14,11 +14,18 @@
 	} from "$lang/runtime"
 
 	$: savedLanguage = browser && localStorage.getItem("language")
-	$: lang = isAvailableLanguageTag(savedLanguage) ? savedLanguage : sourceLanguageTag
+
+	$: lang = isAvailableLanguageTag(savedLanguage)
+		? savedLanguage
+		: sourceLanguageTag
+
 	$: setLanguageTag(lang)
 	onSetLanguageTag((newLanguageTag) => {
 		lang = newLanguageTag
-		if (browser) localStorage.setItem("language", newLanguageTag)
+		if (browser) {
+            localStorage.setItem("language", newLanguageTag)
+            document.documentElement.setAttribute("lang", newLanguageTag)
+        }
 	})
 
 	export let data
@@ -62,12 +69,12 @@
 	onMount(() => setTimeout(() => (isLoading = false), 1000))
 </script>
 
-{#key lang}
-	<slot />
-{/key}
-
 {#if isLoading}
 	<Loading />
+{:else}
+	{#key lang}
+		<slot />
+	{/key}
 {/if}
 
 <Toaster />

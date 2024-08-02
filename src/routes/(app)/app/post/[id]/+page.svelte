@@ -50,11 +50,14 @@
 	}
 </script>
 
+<svelte:head>
+    <title>{getPost.author_data.name} on Msharfin</title>
+</svelte:head>
+
 <section class="app-page">
 	<Navbar route="/app" title="Post" />
 	<Post post={getPost} {session} clickable={false} />
 	<div class="prompt">
-		<!-- <img src={userProfile.avatar_url} alt="" /> -->
 		<div class="wrap">
 			<TextPrompt style="compact" />
 		</div>

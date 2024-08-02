@@ -7,6 +7,7 @@
 
 	export let data
 	let { getComment, session } = data
+	$: ({ getComment, session } = data)
 
 	$: if ($postPayload && getComment) {
 		if ($postPayload.eventType === "DELETE") {

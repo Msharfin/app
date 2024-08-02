@@ -1,29 +1,27 @@
 import { json, error } from "@sveltejs/kit"
 
 export const POST = async ({ request, locals: { supabase, getSession } }) => {
-  const { id, type } = await request.json()
+  const comment = await request.json()
   const {
-    user: { userId },
+    user: { id },
   }: any = await getSession()
 
   const deletePost: any = await supabase
-    .from(type === "post"? "posts": "comments")
+    .from("comments")
     .delete()
-    .eq("id", id)
-    .eq("author", userId)
-  
+    .eq("id", comment.id)
+    .eq("author", id)
+    
   const deleteLikes = await supabase
     .from("likes")
     .delete()
-    .eq("liked_id", id)
-
-  if (type === "post"){
-    const deleteComments = await supabase
-      .from("comments")
-      .delete()
-      .eq("commented_id", id)
-  }
-
+    .eq("liked_id", comment.id)
+  
+  const deleteComments = await supabase
+    .from("comments")
+    .delete()
+    .eq("commented_id", comment.id)
+    
   if (deletePost.error || deleteLikes.error) {
     error(400, deletePost.error);
   }
