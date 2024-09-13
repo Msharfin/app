@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="theme-color" content="#1f4f96" />
+		<meta name="google-site-verification" content="wJy8n4HYxxjYyhpa_R_KDqKCtCuzsKBUX9pO5rfV1gg" />
+		<link rel="icon" href="%sveltekit.assets%/images/favicon.png" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Noto+Color+Emoji&display=swap" rel="stylesheet">
+        <link href="https://rsms.me/inter/inter.css" rel="stylesheet">
+        <script type="module" src="https://cdn.jsdelivr.net/npm/emoji-picker-element@^1/index.js"></script>
+        <meta name="viewport" content="width=device-width" />
+		%sveltekit.head%
+	</head>
+	<body data-sveltekit-preload-data="hover">
+		<div style="display: contents">%sveltekit.body%</div>
+	</body>
+	<script src="https://msharfin.statuspage.io/embed/script.js"></script>
+	<script type="module">	
+		const userTheme = localStorage.getItem("theme")
+
+		if (userTheme !== null) {
+			document.documentElement.setAttribute("theme", userTheme)
+		} else if (window.matchMedia("(prefers-color-scheme:dark)").matches) {
+			localStorage.setItem("theme", "dark") 
+			document.documentElement.setAttribute("theme", "dark")
+		} else {
+			localStorage.setItem("theme", "light")
+		}
+	</script>
+</html>

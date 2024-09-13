@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.hoverEffect {
+	@apply transition-all duration-500 ease-in-out hover:scale-[102%];
+}
+
+.smooth {
+    @apply transition-all duration-500 ease-in-out;
+}
+
+.externalLink {
+	vertical-align: baseline;
+	&::after {
+		content: "\2197";
+        margin-inline-start: .125rem;
+		font-size: 1rem;
+		font-family: "Inter";
+	}
+	&:lang(ar):after {
+		content: "\2196";
+	}
+}
+
+emoji-picker {
+    --border-radius: 12px;
+    --emoji-font-family: "Noto Color Emoji";
+    --indicator-color: #0278F7;
+    --input-border-color: transparent;
+    --num-columns: 6;
+    --input-font-size: 1.25rem;
+    --category-emoji-size: 0.95rem;
+    width: 300px;
+    height: 275px
+}
+
+.secondaryBtn {
+    @apply bg-brightAzure hover:bg-hoverBrightAzure dark:bg-darkAzure hoverEffect dark:hover:bg-hoverDarkAzure rounded-full size-12 text-funBlue text-2xl flex items-center justify-center;
+}
+
+.mainBtn {
+    @apply bg-funBlue text-white hover:bg-hoverFunBlue hoverEffect rounded-full size-12 text-2xl flex items-center justify-center;
+}
+
+.mainWideBtn {
+    @apply bg-funBlue hover:bg-hoverFunBlue text-white rounded-full font-semibold;
+}
