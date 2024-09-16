@@ -13,11 +13,11 @@
 
 </script>
 
-<div class="w-full flex items-end h-24 select-none">
+<div class="md:w-1/3 md:ms-48 w-full flex items-end h-24 select-none">
     <h1 class="font-extrabold text-5xl leading-[0.75]">Settings</h1>
 </div>
 
-<div class="mt-6 mb-4 py-2 rounded-full px-2 bg-brightAzure dark:bg-darkAzure flex items-center justify-between">
+<div class="md:w-1/3 md:ms-48 mt-6 mb-4 py-2 rounded-full px-2 bg-brightAzure dark:bg-darkAzure flex items-center justify-between">
     <div class="flex items-center text-funBlue">
         {#if user?.user_metadata.avatar_url}
             <img src={user?.user_metadata.avatar_url} class="rounded-full size-10" alt="Profile Avatar">
@@ -34,7 +34,7 @@
     </button>
 </div>
 
-<div>
+<div class="md:w-1/3 md:ms-48">
     <div class="border-turquoisieGray border-[.5px] rounded-xl p-5">
         <h1 class="flex items-center text-xl font-bold">
             <span class="icon-[solar--paint-roller-bold] text-funBlue me-2"></span>

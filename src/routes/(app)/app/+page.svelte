@@ -14,7 +14,7 @@
 	}
 </script>
 
-<div class="w-full flex justify-between items-end h-24 mb-4 select-none">
+<div class="md:ms-48 w-full flex md:w-1/3 justify-between items-end h-24 mb-4 select-none">
 	<h1 class="font-extrabold text-5xl leading-[0.75]">Home</h1>
 	<button
 		on:click={() => refreshFeed()}
@@ -26,7 +26,7 @@
 	</button>
 </div>
 
-<div class="mt-10">
+<div class="md:ms-48 mt-10 md:w-1/3">
 	{#await posts}
 		<div class="flex items-center justify-center mt-32">
 			<span
