@@ -65,7 +65,7 @@
     likePayload.subscribe((val: any) => {
         if (val) {
             if (val.eventType === "INSERT") {
-                if (post.id === val.new.liked_id) {
+                if (post.id === val.new.liked_id && !post.likes.find((item: any) => item.user_id === user?.id)) {
                     post.likes.push(val.new)
                     hasJustLiked = true
                 }
@@ -135,7 +135,7 @@
         <!-- Media content -->
 
         {#if post.media}
-            <div class="hoverEffect font-sans relative w-full h-max max-h-[24rem] flex py-6 select-none" title="Photo Album">
+            <div class="hoverEffect font-sans relative w-full h-max max-h-[24rem] flex pt-6 pb-4 select-none" title="Photo Album">
                 {#if post.media.length === 3}
                     <!-- svelte-ignore a11y-missing-attribute -->
                     <img class="rounded-xl absolute rotate-3 brightness-0" src={post.media[2].mediaURL} />
