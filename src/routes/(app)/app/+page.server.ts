@@ -30,7 +30,7 @@ export const load = (async ({ locals: { supabase } }) => {
                 .select("*")
                 .eq("commented_id", data[i].id)
 
-            data[i].likes = likes !== undefined ? likes : 0
+            data[i].likes = likes !== undefined ? likes : []
             data[i].comments_count = comments ? comments?.length : 0
 
             data[i].author_data = profile[0]
