@@ -3,7 +3,7 @@
 	import { fly } from "svelte/transition"
 </script>
 
-<div class="fixed overflow-scroll inset-0 w-full h-auto pt-24 bg-white dark:bg-dimGray z-10 px-8" transition:fly={{ x: 500, duration: 500 }}>
+<div class="fixed overflow-scroll md:rounded-2xl md:pt-0 inset-0 w-full md:mt-24 md:mb-4 md:me-8 md:w-1/3 md:border-[0.5px] border-turquoisieGray md:overflow-x-hidden md:start-auto md:end-0 h-auto pt-24 bg-white dark:bg-dimGray z-10 px-8" transition:fly={{ x: 500, duration: 500 }}>
     <div class="w-full flex justify-start items-end h-24">
         <h1 class="font-extrabold text-5xl leading-[0.75]">Menu</h1>
     </div>
@@ -37,7 +37,7 @@
         </button>
 
         <div class="w-full mt-3 inline-flex">
-            <button class="menuButton hoverEffect w-full">
+            <button class="menuButton hoverEffect max-fit">
                 <span class="icon-[solar--bell-linear] text-funBlue mb-1"></span>
                 <span>Notifications</span>
             </button>
