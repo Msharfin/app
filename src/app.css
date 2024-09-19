@@ -9,18 +9,31 @@
 .smooth {
     @apply transition-all duration-500 ease-in-out;
 }
+ 
 
-.externalLink {
-	vertical-align: baseline;
-	&::after {
-		content: "\2197";
-        margin-inline-start: .125rem;
-		font-size: 1rem;
-		font-family: "Inter";
-	}
-	&:lang(ar):after {
-		content: "\2196";
-	}
+.md {
+    & h1 {
+       @apply text-xl font-semibold mt-3 mb-1; 
+    }
+    & li {
+        @apply list-disc ms-12 md:ms-24;
+    }
+    & p {
+        @apply pt-1 text-pretty;
+    }
+    & a {
+        @apply text-funBlue hover:text-hoverFunBlue underline;
+        vertical-align: baseline;
+        &::after {
+            content: "\2197";
+            padding-inline-start: .125rem;
+            font-size: 1rem;
+            font-family: "Inter";
+        }
+        &:lang(ar):after {
+            content: "\2196";
+        }       
+    }
 }
 
 emoji-picker {

@@ -88,9 +88,9 @@
             class="hoverEffect bg-zellige bg-contain bg-right rtl:bg-left bg-no-repeat mt-4 w-full flex-1 rounded-xl bg-brightAzure justify-end dark:bg-darkAzure font-semibold p-4 flex flex-col text-funBlue"
         >
             <a
-                href="#"
+                href="/blog"
                 class="hover:text-hoverFunBlue transition-all duration-500 ease-in-out w-fit"
-                >Resources Portal</a
+                >Blog</a
             >
             <a
                 target="_blank"
