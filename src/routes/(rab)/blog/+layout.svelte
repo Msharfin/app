@@ -21,7 +21,7 @@
                 class="mt-5 flex font-medium w-fit items-center text-sm px-2 hoverEffect justify-center rounded-full hover:bg-hoverBrightAzure hover:dark:bg-hoverDarkAzure bg-brightAzure dark:bg-darkAzure text-funBlue"
             >
                 <span class="icon-[solar--book-linear] me-1"></span>
-                <span>The resources portal</span>
+                <span>Resources portal</span>
             </button>
         </div>
     </div>

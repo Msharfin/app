@@ -20,7 +20,7 @@
                 class="mt-5 flex font-medium w-fit items-center text-sm px-2 hoverEffect justify-center rounded-full hover:bg-hoverBrightAzure hover:dark:bg-hoverDarkAzure bg-brightAzure dark:bg-darkAzure text-funBlue"
             >
                 <span class="icon-[solar--pen-new-square-outline] me-1"></span>
-                <span>The blog</span>
+                <span>Blog</span>
             </button>
         </div>
     </div>
