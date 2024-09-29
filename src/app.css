@@ -10,6 +10,25 @@
     @apply transition-all duration-500 ease-in-out;
 }
  
+.notice {
+    @apply bg-yellow-100 w-full md:w-1/2 dark:bg-yellow-900 text-yellow-600 mt-5 p-3 rounded-xl flex flex-col;
+    & span {
+        @apply icon-[solar--danger-triangle-bold-duotone] text-4xl;
+    }
+}
+
+.externalLink {
+    vertical-align: baseline;
+    &::after {
+        content: "\2197";
+        padding-inline-start: .125rem;
+        font-size: 1rem;
+        font-family: "Inter";
+    }
+    &:lang(ar):after {
+        content: "\2196";
+    }      
+}
 
 .md {
     & h1 {

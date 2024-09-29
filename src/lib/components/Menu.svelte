@@ -7,10 +7,10 @@
     <div class="w-full flex justify-start items-end h-24">
         <h1 class="font-extrabold text-5xl leading-[0.75]">Menu</h1>
     </div>
-    <div class="bg-yellow-100 dark:bg-yellow-900 text-yellow-600 mt-5 p-3 rounded-xl flex flex-col">
-        <span class="icon-[solar--danger-triangle-bold-duotone] text-4xl mb-2"></span>
+    <div class="notice">
+        <span class="mb-2"></span>
         <p class="leading-5">
-            This project is in early development! if you found any bugs or issues please email us at <b>support@msharf.in</b> or report them at the Discord server.
+            This project is in early development! if you found any bugs or issues please check this <a href="/resources/guides/report_bugs" class="externalLink hover:underline font-bold">article</a>.
         </p>
     </div>
     <div class="bg-brightAzure dark:bg-darkAzure text-indigo-500 mt-5 p-3 rounded-xl flex flex-col">
@@ -31,12 +31,12 @@
             </button>  
         </div>
 
-        <button on:click={() => goto("/app/create")} class="menuButton bg-fancyShape bg-cover bg-no-repeat bg-center bg-funBlue text-white !border-transparent hoverEffect w-full">
-            <span class="icon-[solar--pen-new-round-outline]"></span>
+        <button on:click={() => goto("/app/create")} class="!me-0 menuButton bg-fancyShape bg-cover bg-no-repeat bg-center bg-funBlue text-white !border-transparent hoverEffect w-full">
+            <span class="icon-[solar--pen-new-round-outline] mb-1"></span>
             <span>Create</span>
         </button>
 
-        <div class="w-full mt-3 inline-flex">
+        <div class="w-full my-3 inline-flex">
             <button class="menuButton hoverEffect max-fit">
                 <span class="icon-[solar--bell-linear] text-funBlue mb-1"></span>
                 <span>Notifications</span>
@@ -46,6 +46,12 @@
                 <span>Settings</span>
             </button>  
         </div>
+
+        <button on:click={() => alert("Coming soon...")} class="menuButton hoverEffect w-full">
+            <img src="/images/riads_icon.webp" alt="Riads" class="size-6 mb-1" />
+            <span>Riads</span>
+        </button>
+
     </div>
 </div>
 
