@@ -36,14 +36,14 @@ const supabase: Handle = async ({ event, resolve }) => {
 		}
 
 		const {
-			data: { user },
+			data,
 			error,
-        } = await event.locals.supabase.auth.getUser()
+        }: any = await event.locals.supabase.from("users").select("*").eq("id", session.user.id)
 		if (error) {
 			return { session: null, user: null }
 		}
 
-		return { session, user }
+		return { session, user: data[0] }
 	}
 
 	return resolve(event, {

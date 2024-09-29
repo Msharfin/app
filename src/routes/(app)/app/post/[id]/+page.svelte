@@ -7,7 +7,7 @@
     $:({ post, user } = data)
 
     let previousRoute: string = "/app"
-    afterNavigate((route) => previousRoute = (route.from?.url.pathname !== $page.url.pathname ? route.from?.url.pathname: previousRoute) as string)
+    afterNavigate((route) => previousRoute = (route.from?.url.pathname !== $page.url.pathname && route.from?.url.pathname !== undefined ? route.from?.url.pathname: previousRoute) as string)
 </script>
 
 <div class="pb-3 mt-3 flex items-center justify-between">

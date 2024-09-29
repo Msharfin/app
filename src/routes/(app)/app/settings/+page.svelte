@@ -4,7 +4,7 @@
 	import { changeTheme, theme } from '$lib/theme'
 
     export let data
-    $:({ user, supabase } = data)
+    $:({ user, supabase, session } = data)
 
     const logOut = async () => {
         await supabase.auth.signOut()
@@ -19,14 +19,14 @@
 
 <div class="md:w-1/3 md:ms-48 mt-6 mb-4 py-2 rounded-full px-2 bg-brightAzure dark:bg-darkAzure flex items-center justify-between">
     <div class="flex items-center text-funBlue">
-        {#if user?.user_metadata.avatar_url}
-            <img src={user?.user_metadata.avatar_url} class="rounded-full size-10" alt="Profile Avatar">
+        {#if user.avatar_url}
+            <img src={user.avatar_url} class="rounded-full size-10" alt="Profile Avatar">
         {:else}
             <span class="icon-[solar--user-line-duotone] text-3xl"></span>
         {/if}
         <div class="ms-2 leading-4">
-            <h1 class="font-bold">{user?.user_metadata.slug}</h1>
-            <h2>{user?.user_metadata.email}</h2>
+            <h1 class="font-bold">{user.slug}</h1>
+            <h2>{session?.user.email}</h2>
         </div>        
     </div>
     <button on:click={() => logOut()} class="flex items-center justify-center hoverEffect p-1 rounded-full hover:bg-hoverBrightAzure dark:hover:bg-hoverDarkAzure">
@@ -59,7 +59,7 @@
             <li class="flex items-center justify-between">
                 <span>Username</span>
                 <div class="flex items-center">
-                    <span class="font-bold">{user?.user_metadata.name}</span>
+                    <span class="font-bold">{user.name}</span>
                     <span class="secondaryBtn ms-2 !size-8 !text-base">
                         <span class="icon-[solar--pen-linear]"></span>
                     </span>
@@ -67,7 +67,7 @@
             </li>
             <li class="flex items-center justify-between">
                 <span>Msharfin ID</span>
-                <span class="font-bold">{user?.user_metadata.slug}</span>
+                <span class="font-bold">{user.slug}</span>
             </li>
             <button on:click={() => updateUser()} class="hoverEffect rounded-full py-1 mt-4 w-full bg-brightAzure text-funBlue dark:bg-darkAzure dark:hover:bg-hoverDarkAzure hover:bg-hoverBrightAzure">
                 Sync Profile for legacy users

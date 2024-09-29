@@ -13,11 +13,6 @@ export const actions = {
             fail(400, { message: "Something went wrong!" })
         }
 
-        await supabase.auth.updateUser({
-            data: {
-                name: newName
-            }
-        })
         return { success: true }
     }
 } satisfies Actions

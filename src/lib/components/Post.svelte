@@ -3,10 +3,13 @@
 	import { likePayload, postPayload } from "$lib/stores"
 	import type { User } from "@supabase/supabase-js"
 	import { DateTime } from "luxon"
+	import { findHashtags } from "$lib/postManipulation"
 
 	export let post: any
 	export let postsList: any
 	export let user: User | null
+
+	const { newContent, hashtags } = findHashtags(post.content)
 
 	let hasJustLiked = false
 
@@ -62,44 +65,57 @@
 		postPayload.set(null)
 	}
 
-    likePayload.subscribe((val: any) => {
-        if (val) {
-            if (val.eventType === "INSERT") {
-                if (post.id === val.new.liked_id && !post.likes.find((item: any) => item.user_id === user?.id)) {
-                    post.likes.push(val.new)
-                    hasJustLiked = true
-                }
-            }
-            // Don't set it to else
-            else if (val.eventType === "DELETE") {
-                if (
-                    post.likes.find((item: any) => item.id === val.old.id)
-                ) {
-                    post.likes.splice(
-                        post.likes.indexOf(
-                            post.likes.find(
-                                (item: any) => item.id === val.old.id,
-                            ),
-                        ),
-                        1,
-                    )
-                }
-            }
-            post.likes = post.likes
-            likePayload.set(null)     
-        }
-    })
+	likePayload.subscribe((val: any) => {
+		if (val) {
+			if (val.eventType === "INSERT") {
+				if (
+					post.id === val.new.liked_id &&
+					!post.likes.find((item: any) => item.user_id === user?.id)
+				) {
+					post.likes.push(val.new)
+					hasJustLiked = true
+				}
+			}
+			// Don't set it to else
+			else if (val.eventType === "DELETE") {
+				if (post.likes.find((item: any) => item.id === val.old.id)) {
+					post.likes.splice(
+						post.likes.indexOf(
+							post.likes.find(
+								(item: any) => item.id === val.old.id,
+							),
+						),
+						1,
+					)
+				}
+			}
+			post.likes = post.likes
+			likePayload.set(null)
+		}
+	})
 </script>
 
-<div class="flex w-full mb-5 last-of-type:mb-0 cursor-default" role="button" tabindex="0" on:keydown={(e) => e.key === "Enter" ? goto(`/app/post/${post.id}`): null } on:click={() => goto(`/app/post/${post.id}`)}>
+<div
+	class="flex w-full mb-5 last-of-type:mb-0 cursor-default"
+	role="button"
+	tabindex="0"
+	on:keydown={(e) =>
+		e.key === "Enter" ? goto(`/app/post/${post.id}`) : null}
+	on:click={() => goto(`/app/post/${post.id}`)}
+>
 	<div class="w-fit me-2.5">
-        <button on:click|stopPropagation={() => goto(`/app/profile/${post.author_data.slug}`)}>
-            <img
-                src={post.author_data.avatar_url ? post.author_data.avatar_url: "/images/no_pfp.png"}
-                class="rounded-full size-10"
-                alt="Profile"
-            />          
-        </button>
+		<button
+			on:click|stopPropagation={() =>
+				goto(`/app/profile/${post.author_data.slug}`)}
+		>
+			<img
+				src={post.author_data.avatar_url
+					? post.author_data.avatar_url
+					: "/images/no_pfp.png"}
+				class="rounded-full size-10"
+				alt="Profile"
+			/>
+		</button>
 
 		<div class="flex items-center justify-between text-lg mt-1">
 			{#if post.author_data.is_verified}
@@ -117,54 +133,101 @@
 		<!-- Post info -->
 
 		<div class="flex justify-between items-start mb-2.5">
-			<div class="flex flex-col leading-[1.125rem] text-[.95rem]">
-				<span>{post.author_data.name}</span>
-				<span class="font-bold text-funBlue"
+			<a
+				href="/app/profile/{post.author_data.slug}"
+				class="flex flex-col leading-[1.125rem] text-[.95rem]"
+			>
+				<span class="">{post.author_data.name}</span>
+				<span class="text-funBlue font-medium"
 					>{post.author_data.slug}</span
 				>
-			</div>
+			</a>
 			<span class="text-turquoisieGray">{dataTime.toRelative()}</span>
 		</div>
 
 		<!-- Contents -->
-
-		<p class="text-base">
-			{post.content}
+		<p class="text-base content">
+			{@html newContent}
 		</p>
 
-        <!-- Media content -->
-
-        {#if post.media}
-            <div class="hoverEffect font-sans relative w-full h-max max-h-[24rem] flex pt-6 pb-4 select-none" title="Photo Album">
-                {#if post.media.length === 3}
-                    <!-- svelte-ignore a11y-missing-attribute -->
-                    <img class="rounded-xl absolute rotate-3 brightness-0" src={post.media[2].mediaURL} />
-                    <!-- svelte-ignore a11y-missing-attribute -->
-                    <img class="rounded-xl absolute brightness-50" src={post.media[1].mediaURL} />
-                    <!-- svelte-ignore a11y-missing-attribute -->
-                    <img class="rounded-xl -rotate-3" src={post.media[0].mediaURL} />
-                {:else if post.media.length === 2}
-                    <!-- svelte-ignore a11y-missing-attribute -->
-                    <img class="rounded-xl -rotate-3 absolute brightness-50" src={post.media[1].mediaURL} />
-                    <!-- svelte-ignore a11y-missing-attribute -->
-                    <img class="rounded-xl" src={post.media[0].mediaURL} />
-                {:else}
-                    <!-- svelte-ignore a11y-missing-attribute -->
-                    <img class="rounded-xl" src={post.media[0].mediaURL} />
-                {/if}
+        <!-- URLs -->
+		{#if post.urls.length > 0}
+            <div class="mb-1 p-1.5 leading-5 text-turquoisieGray mt-2 border-turquoisieGray border-[.5px] rounded-xl">
+                <span class="font-bold">Shared links</span>
+                {#each post.urls as u}
+                    {#if u.type === "url"}      
+                        <a href={u.href} class="externalLink hoverEffect hover:underline first-of-type:mt-2">{u.value}</a>
+                    {/if}
+                {/each}
             </div>
-        {/if}
+		{/if}
+		
+        <!-- Media content -->
+		{#if post.media}
+			<div
+				class="hoverEffect font-sans relative w-full mt-4 mb-1 h-max max-h-[24rem] flex select-none"
+				title="Photo Album"
+			>
+				{#if post.media.length === 3}
+					<!-- svelte-ignore a11y-missing-attribute -->
+					<img
+						class="rounded-xl absolute rotate-3 brightness-0"
+						src={post.media[2].mediaURL}
+					/>
+					<!-- svelte-ignore a11y-missing-attribute -->
+					<img
+						class="rounded-xl absolute brightness-50"
+						src={post.media[1].mediaURL}
+					/>
+					<!-- svelte-ignore a11y-missing-attribute -->
+					<img
+						class="rounded-xl -rotate-3"
+						src={post.media[0].mediaURL}
+					/>
+				{:else if post.media.length === 2}
+					<!-- svelte-ignore a11y-missing-attribute -->
+					<img
+						class="rounded-xl -rotate-3 absolute brightness-50"
+						src={post.media[1].mediaURL}
+					/>
+					<!-- svelte-ignore a11y-missing-attribute -->
+					<img class="rounded-xl" src={post.media[0].mediaURL} />
+				{:else}
+					<!-- svelte-ignore a11y-missing-attribute -->
+					<img class="rounded-xl" src={post.media[0].mediaURL} />
+				{/if}
+			</div>
+		{/if}
+
+		<!-- Hashtags -->
+		<!-- TODO: Fix a11y errors -->
+		{#if hashtags}
+			<!-- svelte-ignore a11y-no-static-element-interactions -->
+			<!-- svelte-ignore a11y-click-events-have-key-events -->
+			<div
+				class="flex mb-1 mt-2 flex-wrap items-center py-0.5 text-xs px-2 rounded-xl bg-brightAzure dark:bg-darkAzure text-funBlue"
+				on:click|stopPropagation
+			>
+				<h1 class="font-bold select-none">Hashtags:</h1>
+
+				{#each hashtags as h}
+					<span class="me-1 first-of-type:ms-1">#{h}</span>
+				{/each}
+			</div>
+		{/if}
 
 		<!-- Interactions -->
-
 		<div class="interactions mt-2 flex items-center justify-between w-2/3">
-			<button 
-                class="hoverEffect"
+			<button
+				class="hoverEffect"
 				class:hasLiked
 				on:click|stopPropagation={async () => await hasInteracted()}
 			>
 				{#if hasLiked}
-					<span class:likeAnimation={hasJustLiked} class="icon-[solar--heart-bold]"></span>
+					<span
+						class:likeAnimation={hasJustLiked}
+						class="icon-[solar--heart-bold]"
+					></span>
 				{:else}
 					<span class="icon-[solar--heart-outline]"></span>
 				{/if}
@@ -187,31 +250,37 @@
 </div>
 
 <style>
-@keyframes likePop {
-    0% {
-        transform: scale(0.75);
-    }
-    50% {
-        transform: scale(1.35) rotate(360deg);
-    }
-    100% {
-        transform: scale(1) rotate(360deg);
-    }
-}
+	@keyframes likePop {
+		0% {
+			transform: scale(0.75);
+		}
+		50% {
+			transform: scale(1.35) rotate(360deg);
+		}
+		100% {
+			transform: scale(1) rotate(360deg);
+		}
+	}
 
-.likeAnimation {
-        animation: likePop 500ms normal
-}
+	.likeAnimation {
+		animation: likePop 500ms normal;
+	}
 
-.interactions {
-    & button {
-        @apply flex text-[1.125rem] items-center justify-center text-turquoisieGray tabular-nums;
-        & span:not(:first-child) {
-            @apply text-[0.95rem];
-        }
-    }
-    & .hasLiked {
-        @apply text-rose-600;
-    }
-}
+	.interactions {
+		& button {
+			@apply flex text-[1.125rem] items-center justify-center text-turquoisieGray tabular-nums;
+			& span:not(:first-child) {
+				@apply text-[0.95rem];
+			}
+		}
+		& .hasLiked {
+			@apply text-rose-600;
+		}
+	}
+
+	.content {
+		& a {
+			@apply font-bold text-funBlue;
+		}
+	}
 </style>

@@ -93,6 +93,11 @@
                 >Blog</a
             >
             <a
+                href="/resources"
+                class="hover:text-hoverFunBlue transition-all duration-500 ease-in-out w-fit"
+                >Resources Portal</a
+            >
+            <a
                 target="_blank"
                 rel="noopener noreferrer"
                 href="https://msharfin.statuspage.io/"

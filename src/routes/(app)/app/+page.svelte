@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { invalidateAll } from "$app/navigation"
 	import Post from "$lib/components/Post.svelte"
-	import type { Snapshot } from "@sveltejs/kit"
 
 	export let data
 	$: ({ user, posts } = data)

@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { enhance } from "$app/forms"
 	import { goto } from "$app/navigation"
-	import Cropper from "cropperjs"
-    import 'cropperjs/dist/cropper.css'
+	import Cropper from "svelte-easy-crop"
 	import type { ActionData } from "./$types"
+	import AvatarCrop from "$lib/components/AvatarCrop.svelte"
 
     export let data
     export let form: ActionData
@@ -11,41 +11,19 @@
 
     let editMode = false
     let isLoading = false
-    let cropElement: HTMLImageElement
-    
-    const updateUser = async () => {
-        await fetch("/app/api/updateUser",{ method: "GET" })
-    }
 
     $: if (form?.success) {
         editMode = false
         isLoading = false
     }
-
-    const changeAvatar = (input: any) => {
-        const file = input.target?.files
-        // const reader = new FileReader()
-        // reader.onload = () => {
-        //     cropElement.src = reader.result as string
-        // }
-        // reader.readAsDataURL(file[0])
-        
-        const cropper = new Cropper(cropElement, {
-            aspectRatio: 1,
-            cropBoxMovable: false,
-            cropBoxResizable: false,
-            toggleDragModeOnDblclick: false,
-            dragMode: 'move',
-            rotatable: true,
-            viewMode: 1,
-        })
-    }
 </script>
 
-<!-- style:display={fileUrl.length > 1 ? "contents": "none"} 
-<div class="absolute top-0 right-0 w-svw h-full block max-w-full px-8">
-    <img id="image" src="/images/chefchaouen.webp" bind:this={cropElement} alt="Your New Avatar" />
-</div> -->
+<!-- style:display={fileUrl.length > 1 ? "contents": "none"}  -->
+<!-- {#if cropElement}
+    <div class="z-20 relative w-svw h-svh">
+        <Cropper crop={{ x:0, y:0 }} on:cropcomplete={e => console.log(e.detail)} image={cropElement} aspect={1}/>
+    </div>
+{/if} -->
 
 <div class="w-full flex justify-between items-end h-24 mb-4 select-none">
 	<h1 class="font-extrabold text-5xl leading-[0.75]">Account</h1>
@@ -67,7 +45,7 @@
             {#if editMode}
                 <form method="post" action="?/updateUsername" use:enhance on:submit={() => isLoading = true} class="flex ps-5 relative justify-end items-center">
                     <!-- svelte-ignore a11y-autofocus -->
-                    <input autofocus name="name" style:display={isLoading? "none": "inline"} class="bg-transparent w-1/2 text-end font-bold" type="text" value={user?.user_metadata.name}>
+                    <input autofocus name="name" style:display={isLoading? "none": "inline"} class="bg-transparent w-1/2 text-end font-bold" type="text" value={user.name}>
                     <button disabled={isLoading} class="secondaryBtn ms-2 !size-9 !text-lg">
                         {#if isLoading}
                             <span class="icon-[svg-spinners--180-ring-with-bg]"></span>
@@ -78,7 +56,7 @@
                 </form>  
             {:else}
                 <div class="flex items-center">
-                    <span class="font-bold">{user?.user_metadata.name}</span>
+                    <span class="font-bold">{user.name}</span>
                     <button on:click={() => editMode = true} class="secondaryBtn ms-2 !size-9 !text-lg">
                         <span class="icon-[solar--pen-linear]"></span>
                     </button>
@@ -87,21 +65,15 @@
         </li>
         <li class="flex items-center justify-between">
             <span>Msharfin ID</span>
-            <span class="font-bold">{user?.user_metadata.slug}</span>
+            <span class="font-bold">{user.slug}</span>
         </li>
         <li class="flex items-center justify-between">
             <span>Avatar</span>
             <div class="flex items-center">
-                <label class="secondaryBtn me-2 !size-9 !text-lg cursor-pointer">
-                    <span class="icon-[solar--camera-add-outline]"></span>
-                    <input on:change={(e) => changeAvatar(e)} accept="image/jpeg,image/jpg,image/png" hidden type="file" name="pfp">
-                </label>
-                <img src={user?.user_metadata.avatar_url} alt="Your Avatar" class="size-9 border-[.5px] rounded-full border-turquoisieGray" >
+                <AvatarCrop />
+                <img src={user.avatar_url} alt="Your Avatar" class="size-9 border-[.5px] rounded-full border-turquoisieGray" >
             </div>
         </li>
-        <button on:click={() => updateUser()} class="hoverEffect rounded-full py-1 mt-4 w-full bg-brightAzure text-funBlue dark:bg-darkAzure dark:hover:bg-hoverDarkAzure hover:bg-hoverBrightAzure">
-            Sync Profile for legacy users
-        </button>
     </ul>
 </div>
 

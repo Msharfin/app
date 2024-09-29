@@ -32,15 +32,15 @@
         }).subscribe()
 </script>
 
-<header class="py-5 sticky top-0 left-0 px-8 flex items-center justify-between z-20 bg-white dark:bg-dimGray">
+<header class="py-5 sticky top-0 left-0 px-8 flex items-center justify-between z-50 bg-white dark:bg-dimGray">
     <span
         class="bg-logo bg-contain bg-no-repeat size-14 bg-center"
         title="Msharfin logo"
     ></span>
     <div class="flex items-center">
-        <button class="secondaryBtn" on:click={() => goto(`/app/profile/${user?.user_metadata.slug}`)}>
-            {#if user?.user_metadata.avatar_url}
-                <img src={user?.user_metadata.avatar_url} class="border-[.5px] border-turquoisieGray rounded-full" alt="Your Avatar">
+        <button class="secondaryBtn" on:click={() => goto(`/app/profile/${user.slug}`)}>
+            {#if user.avatar_url}
+                <img src={user.avatar_url} class="border-[.5px] border-turquoisieGray rounded-full" alt="Your Avatar">
             {:else}
                 <span class="icon-[solar--user-linear]"></span>
             {/if}
