@@ -1,6 +1,6 @@
 {
     "name": "msharfin-web",
-    "version": "0.1.6+2091618",
+    "version": "0.1.6+12101623",
     "private": true,
     "scripts": {
         "dev": "vite dev --host",
