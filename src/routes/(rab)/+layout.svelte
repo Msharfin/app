@@ -1,9 +1,10 @@
 <script>
 	import { goto } from "$app/navigation"
-
-
 	import { changeTheme, theme } from "$lib/theme"
 	import { scale } from "svelte/transition"
+
+    export let data
+    $:({session} = data)
 
 </script>
 
@@ -13,7 +14,7 @@
         title="Msharfin logo"
     ></span>
     <div class="flex items-center">
-        <button class="secondaryBtn" on:click={() => goto("/")}><span class="icon-[solar--home-2-bold]"></span></button>
+        <button class="secondaryBtn" on:click={() => goto(session ? "/app" :"/")}><span class="icon-[solar--home-2-bold]"></span></button>
         <button class="secondaryBtn ms-2" on:click={() => changeTheme()}>
             {#if $theme === "dark"}
                 <span
