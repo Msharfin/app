@@ -13,10 +13,10 @@
             This project is in early development! if you found any bugs or issues please check this <a href="/resources/guides/report_bugs" class="externalLink hover:underline font-bold">article</a>.
         </p>
     </div>
-    <div class="bg-brightAzure dark:bg-darkAzure text-indigo-500 mt-5 p-3 rounded-xl flex flex-col">
+    <div class="bg-brightAzure dark:bg-darkAzure text-indigo-500 mt-4 p-3 rounded-xl flex flex-col">
         <span class="icon-[tabler--brand-discord] text-4xl mb-2"></span>
         <p class="leading-5">
-            Receive news, latest updates and discuss everything Msharfin on our Discord server, join us by clicking <b><a href="https://discord.gg/qv9fZ5Tr5F" class="externalLink hover:underline" target="_blank" rel="noopener noreferrer">here</a></b>
+            Receive news, latest updates and discuss everything Msharfin on our Discord server, join us by clicking <b><a href="https://discord.gg/qv9fZ5Tr5F" class="externalLink hover:underline" target="_blank" rel="noopener noreferrer">here</a>.</b>
         </p>
     </div>
     <div class="flex flex-wrap mt-4 mb-8 w-full">
@@ -25,7 +25,7 @@
                 <span class="icon-[solar--home-2-outline] text-funBlue mb-1"></span>
                 <span>Home</span>
             </button>
-            <button class="menuButton hoverEffect w-full">
+            <button on:click={() => goto("/app/search")} class="menuButton hoverEffect w-full">
                 <span class="icon-[solar--minimalistic-magnifer-linear] text-funBlue mb-1"></span>           
                 <span>Search</span>
             </button>  
