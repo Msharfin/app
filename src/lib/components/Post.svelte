@@ -96,7 +96,7 @@
 </script>
 
 <div
-	class="flex w-full mb-5 last-of-type:mb-0 cursor-default"
+	class="flex w-full mt-5 first-of-type:mt-0 cursor-default"
 	role="button"
 	tabindex="0"
 	on:keydown={(e) =>
@@ -161,11 +161,11 @@
                 {/each}
             </div>
 		{/if}
-		
+
         <!-- Media content -->
 		{#if post.media}
 			<div
-				class="hoverEffect font-sans relative w-full mt-4 mb-1 h-max max-h-[24rem] flex select-none"
+				class="hoverEffect font-sans relative w-full mt-4 mb-2 h-max max-h-[24rem] flex select-none"
 				title="Photo Album"
 			>
 				{#if post.media.length === 3}
@@ -205,7 +205,7 @@
 			<!-- svelte-ignore a11y-no-static-element-interactions -->
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
 			<div
-				class="flex mb-1 mt-2 flex-wrap items-center py-0.5 text-xs px-2 rounded-xl bg-brightAzure dark:bg-darkAzure text-funBlue"
+				class="flex mb-1 mt-2 flex-wrap items-center py-0.5 text-xs px-2 rounded-lg bg-brightAzure dark:bg-darkAzure text-funBlue"
 				on:click|stopPropagation
 			>
 				<h1 class="font-bold select-none">Hashtags:</h1>

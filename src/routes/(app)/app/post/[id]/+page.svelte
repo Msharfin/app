@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { afterNavigate, goto } from '$app/navigation'
 	import { page } from '$app/stores'
+	import Ad from '$lib/components/Ad.svelte'
 	import Post from '$lib/components/Post.svelte'
 
 	export let data
@@ -10,7 +11,7 @@
     afterNavigate((route) => previousRoute = (route.from?.url.pathname !== $page.url.pathname && route.from?.url.pathname !== undefined ? route.from?.url.pathname: previousRoute) as string)
 </script>
 
-<div class="pb-3 mt-3 flex items-center justify-between">
+<div class="pb-1 mt-3 flex items-center justify-between">
     <h1 class="text-2xl font-bold">Post</h1>
     <button
         on:click={() => goto(previousRoute)}
@@ -33,6 +34,7 @@
         <h1 class="text-xl font-bold">Comments</h1>
         <h2 class="text-turquoisieGray">{post.comments_count}</h2>
     </div>
+    <Ad />
     <div class="mt-4">
         {#each post.comments as comment}
             <Post post={comment} {user} postsList={post.comments}/>

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { invalidateAll } from "$app/navigation"
+	import Ad from "$lib/components/Ad.svelte"
 	import Post from "$lib/components/Post.svelte"
 
 	export let data
@@ -35,6 +36,9 @@
 	{:then posts}
 		{#each posts as post (post.id)}
 			<Post {post} postsList={posts} {user} />
+            {#if (posts.indexOf(post) % 5) === 0 }
+                <Ad />
+            {/if}
 		{:else}
 			<div class="error-pg">
 				<img src="/images/error.png" alt="" />
