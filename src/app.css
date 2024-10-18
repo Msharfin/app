@@ -11,7 +11,7 @@
 }
  
 .notice {
-    @apply bg-yellow-100 w-full md:w-1/2 dark:bg-yellow-900 text-yellow-600 mt-5 p-3 rounded-xl flex flex-col;
+    @apply bg-yellow-100 w-full dark:bg-yellow-900 text-yellow-600 mt-5 p-3 rounded-xl flex flex-col;
     & span {
         @apply icon-[solar--danger-triangle-bold-duotone] text-4xl;
     }
@@ -52,12 +52,6 @@
         &:lang(ar):after {
             content: "\2196";
         }       
-    }
-    & .notice {
-        @apply bg-yellow-100 w-full md:w-1/2 dark:bg-yellow-900 text-yellow-600 mt-5 p-3 rounded-xl flex flex-col;
-        & span {
-            @apply icon-[solar--danger-triangle-bold-duotone] text-4xl;
-        }
     }
 }
 

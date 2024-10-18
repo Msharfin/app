@@ -26,7 +26,7 @@
         </div>
     </div>
     
-    <div class="flex flex-col flex-1 md:px-8 mt-5 md:mt-0 pb-8">
+    <div class="flex flex-col flex-1 md:px-48 mt-5 md:mt-0 pb-8">
         <slot />    
     </div>
 </div>
