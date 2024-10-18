@@ -2,6 +2,7 @@
 	import { goto } from '$app/navigation'
 	import Switch from '$lib/components/Switch.svelte'
 	import { changeTheme, theme } from '$lib/theme'
+    import { version } from "$app/environment"
 
     export let data
     $:({ user, supabase, session } = data)
@@ -74,4 +75,21 @@
             </button>
         </ul> -->
     </button>
+    <div class="border-turquoisieGray border-[.5px] rounded-xl p-5 mt-3 w-full">
+        <h1 class="flex items-center text-xl font-bold">
+            <span class="icon-[solar--info-circle-bold] text-funBlue me-2"></span>
+            <span>About</span>
+        </h1>
+        <ul class="mt-4 flex flex-col">
+            <li class="flex items-center justify-between">
+                <span>Version</span>
+                <span class="text-turquoisieGray">{version}</span>
+            </li>                
+            <a href="/app/blog" class="underline">Blog</a>
+            <a href="/app/resources" class="underline">Resources Portal</a>
+            <li class="flex mt-4 items-center justify-center">
+                <span class="font-medium text-turquoisieGray">Made in <span class="font-bold">Souss-Massa</span></span>
+            </li>
+        </ul>
+    </div>
 </div>
