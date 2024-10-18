@@ -37,7 +37,7 @@
         </button>
 
         <div class="w-full my-3 inline-flex">
-            <button class="menuButton hoverEffect max-fit">
+            <button class="menuButton hoverEffect w-full">
                 <span class="icon-[solar--bell-linear] text-funBlue mb-1"></span>
                 <span>Notifications</span>
             </button>

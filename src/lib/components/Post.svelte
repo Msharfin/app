@@ -165,7 +165,7 @@
         <!-- Media content -->
 		{#if post.media}
 			<div
-				class="hoverEffect font-sans relative w-full mt-4 mb-2 h-max max-h-[24rem] flex select-none"
+				class="hoverEffect font-sans relative w-full max-w-72 mt-4 mb-2 h-fit flex select-none"
 				title="Photo Album"
 			>
 				{#if post.media.length === 3}
