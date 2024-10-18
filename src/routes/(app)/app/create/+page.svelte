@@ -25,12 +25,12 @@
             <img draggable="false" src={user.avatar_url ? user.avatar_url: "/images/no_pfp.png"} class="size-12 border-turquoisieGray rounded-full select-none" alt="Your Avatar">
         </div>
         <div class="ms-2 flex-1">
-            <textarea maxlength="256" bind:value={content} class="bg-transparent text-xl w-full resize-none p-2 h-48" spellcheck name="content" id="content" placeholder="Tell the world your story!" draggable="false"></textarea>
+            <textarea maxlength="256" bind:value={content} class="bg-transparent text-xl w-full resize-none p-2 h-48 placeholder:text-turquoisieGray" spellcheck name="content" id="content" placeholder="Tell the world your story!" draggable="false"></textarea>
         </div>
     </div>
 
-    <div class="select-none rounded-full bg-brightAzure dark:bg-darkAzure relative flex items-center justify-between p-1">
-        <div class="flex items-center ps-2">
+    <div class="select-none flex items-center justify-between">
+        <div class="flex relative items-center ps-2 bg-brightAzure dark:bg-darkAzure p-1.5 rounded-full">
             <button type="button" class="secondaryBtn !size-9">
                 <span class="icon-[solar--gallery-add-outline]"></span>
             </button>
@@ -41,15 +41,17 @@
                 <span class="icon-[solar--smile-circle-outline]"></span>
             </button>        
             {#if openPanel}
-                <div class="z-10 absolute top-full left-0" on:focusout={() => openPanel = !openPanel}>
+                <div class="z-10 absolute top-0 left-full" on:focusout={() => openPanel = !openPanel}>
                     <emoji-picker on:emoji-click={addEmoji} transition:scale={{ start: 1.25 }} class="{$theme}"></emoji-picker>
                 </div>
             {/if}        
-            <span class="tabular-nums text-funBlue ms-2">{content ? content.length: 0}/256</span>
         </div>
-        <button type="submit" class="mainBtn !text-3xl">
-            <span class="icon-[mingcute--send-fill]"></span>
-        </button>
+        <div class="flex items-center">
+            <span class="tabular-nums text-funBlue me-5">{content ? content.length: 0}/256</span>
+            <button type="submit" class="mainBtn !text-3xl">
+                <span class="icon-[mingcute--send-fill]"></span>
+            </button>            
+        </div>
     </div>    
 </form>
 
